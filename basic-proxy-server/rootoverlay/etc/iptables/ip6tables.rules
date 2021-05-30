@@ -1,0 +1,27 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+#This allows connections that match other rules to automaticly allow two way communications
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# always allow the loopback
+-A OUTPUT -o lo -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+
+# Allow pings, this is super helpful for diagnostics
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+-A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# Inputs
+-A INPUT -m multiport -p tcp --dports 22 -j ACCEPT # SSH
+-A INPUT -m multiport -p tcp --dports 8888 -j ACCEPT # Proxy Server(tiny proxy)
+
+# Outputs
+-A OUTPUT -m multiport -p udp --dports 53 -j ACCEPT # DNS
+-A OUTPUT -m multiport -p udp --dports 123 -j ACCEPT # NTP
+-A OUTPUT -m multiport -p tcp --dports 80,443,8080 -j ACCEPT # HTTP/HTTPS
+
+COMMIT

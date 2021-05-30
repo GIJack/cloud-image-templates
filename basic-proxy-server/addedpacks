@@ -1,0 +1,20 @@
+# List of Packages to be installed, one per line, # is comments
+
+# Proxy Server
+tinyproxy
+
+# system tools
+sysstat
+htop
+iotop
+lsof
+
+# Base TCP/IP diagnostic tools
+whois
+net-tools
+bind
+traceroute
+
+#extra
+bash-completion
+cowsay
