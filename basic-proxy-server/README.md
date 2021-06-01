@@ -1,7 +1,8 @@
 Basic Proxy Server
 ==================
-This is a basic tinyproxy based HTTP Proxy server.
+This is a basic unauthenticated tinyproxy HTTP Proxy server.
 
 features:
-- scripts for intialization and password change. See MOTD
+- script for setting up the port.
 - iptables firewall configuration blocking all other traffic
+- Open Proxy, no authenication
