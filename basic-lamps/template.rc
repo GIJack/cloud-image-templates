@@ -14,7 +14,7 @@ COMPRESS_OPTS=""
 PROJECT_NAME="LAMPS Example Project"
 PROJECT_VER=0
 PROJECT_ARCH="any"
-PROJECT_DESCRIPTION=""	# Optional
+PROJECT_DESCRIPTION="Application Server using Linux, Apache, MySQL, PHP and OpenSSL"	# Optional
 
 # Name and Contact of maintainers. This section is optional
 AUTHOR_NAME="GI Jack"
