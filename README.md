@@ -24,3 +24,5 @@ gen_cloud_template.sh compile-template
 EXAMPLES:
 ---------
 **basic-proxy-server** : Basic Anonymous web proxy using tinyproxy
+**authenticated-proxy-server** : Tinyproxy server with BasicAuth
+**basic-lamps** : Linux Apache MySQL PHP OpenSSL Application server.
