@@ -1,0 +1,35 @@
+# List of Packages to be installed, one per line, # is comments
+
+## LAMPS Stack
+#Apache Webserver
+apache
+php-apache
+
+# MySQL, or in this case, MariaDB
+mariadb
+
+# PHP packages
+php
+php-fpm
+#commonly used modules
+php-gd
+php-imagick
+
+# TLS
+openssl
+certbot
+
+## Some basic utils for diagnostics and troubleshooting
+traceroute
+net-tools
+iotop
+htop
+lsof
+strace
+sysstat
+tcpdump
+openbsd-netcat
+iftop
+mtr
+hdparm
+cowsay

@@ -1,0 +1,29 @@
+ _____________________________________________________________________________ 
+/                            Example LAMPS server.                            \
+|                            =====================                            |
+| LAMPS stands for Linux, Apache, MySQL(pronounced My-Squirrel), PHP and      |
+| OpenSSL. In this case, MySQL is substituted for community fork, MariaDB     |
+|                                                                             |
+| Directories of note:                                                        |
+| --------------------                                                        |
+| /var/www/ - www base                                                        |
+| /var/www/<DOMAIN> - how domains are hosted /srv/html - default webpage      |
+| /etc/httpd/conf/vhosts/ - per vhost config files are in here. see example   |
+|                                                                             |
+| Commands of note:                                                           |
+| -----------------                                                           |
+| mysql_secure_installation - run this before using mysql.                    |
+|                                                                             |
+| snakeoil_certs.sh - generate unverified TLS certificate pairs with openssl. |
+| This should be avoided for internet facing domains. see snakeoil_certs.sh   |
+| --help                                                                      |
+|                                                                             |
+| new_domain.sh - add a virtual domain into apache. sets up config and uses   |
+\ certbot to get a new Lets Encrypt! cert. see new_domain.sh --help           /
+ ----------------------------------------------------------------------------- 
+        \   ^__^
+         \  (00)\_______
+            (__)\       )\/\
+             U ||----w |
+                ||     ||
+

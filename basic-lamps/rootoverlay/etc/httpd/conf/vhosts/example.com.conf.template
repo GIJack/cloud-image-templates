@@ -1,0 +1,32 @@
+# Example virtualhost. Edit to appropriate domain and rename file to end in
+# .conf. Make sure you grab the TLS certs with certbot
+
+<VirtualHost *:80>
+    ServerAdmin webmaster@example.com
+    DocumentRoot "/var/www/example.com"
+    ServerName example.com
+    ServerAlias example.com
+    ErrorLog "/var/log/httpd/example.com-error_log"
+    CustomLog "/var/log/httpd/example.com-access_log" common
+
+    <Directory "/var/www/example.com">
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerAdmin webmaster@example.com
+    DocumentRoot "/var/www/example.com"
+    ServerName example.com:443
+    ServerAlias example.com:443
+
+    Include /etc/letsencrypt/options-ssl-apache.conf
+    SSLCertificateFile /etc/letsencrypt/live/example.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/example.com/privkey.pem
+    ErrorLog "/var/log/httpd/example.com-error_log"
+    CustomLog "/var/log/httpd/example.com-access_log" common
+
+    <Directory "/var/www/example.com">
+        Require all granted
+    </Directory>
+</VirtualHost>
