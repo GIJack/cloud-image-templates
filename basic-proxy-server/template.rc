@@ -24,6 +24,7 @@ AUTHOR_GPG_SIG="" # Must match AUTHOR_EMAIL
 # space seperated list of additional contact info in the format of
 # protocol:address. Example. for IRC use IRC:<NETWORK>:<NICK|IRC address>
 #AUTHOR_CONTACT="protocol1:address protocol2:instance:address"
+AUTHOR_CONTACT="irc:libera.chat:GI_Jack"
 
 ### /Project Metadata ###
 
