@@ -43,7 +43,10 @@ main() {
   mkdir -p ${new_web_root}/
   mkdir -p ${new_web_root}/.well_known
   cp /usr/local/share/apache/example_index.html ${new_web_root}/index.html
-  
+  cp /usr/local/share/apache/construction1.gif ${new_web_root}/construction1.gif
+  cp /usr/local/share/apache/construction2.gif ${new_web_root}/construction2.gif
+  sed -i "s/example.com/${domain}/g" ${new_web_root}/index.html
+  sed -i "s/EXAMPLE.COM/${domain^^}/g" ${new_web_root}/index.html
   # restart apache for new changes to take effect
   systemct restart httpd || exit_with_error 1 "could not restart apache, check configuration and error logs!"
   
