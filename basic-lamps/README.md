@@ -34,5 +34,3 @@ more security holes then swiss cheese.
 - https://postfixadmin.sourceforge.io/ - PFA, a web gui for managing postfix mail servers
 - https://www.phpmyadmin.net/ - web gui for managing mysql databases
 
-
--
