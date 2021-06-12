@@ -29,3 +29,10 @@ more security holes then swiss cheese.
 - https://nextcloud.com/ - Personal cloud software
 - https://simplemachines.org/ - Web BBS
 - https://www.phpbb.com/ - Widely used Web BBS
+- https://www.joomla.org/ - Content Management System(CMS). i.e. frontpage software
+- https://www.drupal.org/ - Super complicated CMS that was started by Howard Dean's presidential campaign, way back when.
+- https://postfixadmin.sourceforge.io/ - PFA, a web gui for managing postfix mail servers
+- https://www.phpmyadmin.net/ - web gui for managing mysql databases
+
+
+-
