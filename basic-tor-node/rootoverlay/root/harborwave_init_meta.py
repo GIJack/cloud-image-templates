@@ -10,6 +10,7 @@ Modified for basic-tor-image profile. Payload writes to torrc
 import sys,os
 import json
 import urllib.request
+import subprocess
 from http.client import responses as http_responses
 from datetime import datetime
 
