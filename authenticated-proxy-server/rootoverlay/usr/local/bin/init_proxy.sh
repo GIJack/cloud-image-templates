@@ -3,7 +3,7 @@
 CONFIG=/etc/tinyproxy/tinyproxy.conf
 
 IPTABLES_CONFIG=/etc/iptables/iptables.rules
-IP6TABLES_CONFIG=//etc/iptables/ip6tables.rules
+IP6TABLES_CONFIG=/etc/iptables/ip6tables.rules
 
 help_and_exit(){
   cat 1>&2 << EOF
@@ -46,13 +46,14 @@ main() {
   #Bannner
   "Initializing tinyproxy authenication, see --help for more info"
   # Get username and password:
-  [ -z ${1} ] && read -r -p "Proxy User: " proxyuser
-  [ -z ${2} ] && read -rs -p "Proxy Password: " password
+  [ -z ${1} ] && read -r -p "Proxy User(default: proxyuser): " proxyuser
+  [ -z ${2} ] && read -rs -p "Proxy Password(default: proxypass): " password
   [ -z ${3} ] && read -r -p "Proxy port(default: 8888): " portinput
   
   # Sanity Check, make sure we do in fact have a username and password
-  [ -z ${proxyuser} -o -z ${password} ] && exit_with_error 2 "User or Password is blank, try again!"
-  [ -z ${port} ] && port=8888
+  [ -z "${proxyuser}" ] && proxyuser="proxyuser"
+  [ -z "${password}" ] && password="proxypass"
+  [ -z "${port}" ] && port=8888
   
   # Generate new config line
   authline="BasicAuth ${proxyuser} ${password}"
