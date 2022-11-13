@@ -1,3 +1,4 @@
 # List of Packages to be installed, one per line, # is comments
+python-is-python3
 tor
 iptables-persistent
