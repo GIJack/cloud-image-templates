@@ -1,9 +1,15 @@
 # cloud-image-templates
-Example cloud template image profiles for disk-image-scripts
+Example cloud template image profiles for disk-image-scripts.
 
 [Disk Image Scripts](https://github.com/GIJack/disk-image-scripts)
 
-Here are some example profiles that can be compiled with gen_cloud_template.sh
+Some of these can utilize harbor-wave features such as payload or sequence/name.
+
+Harbor-wave only works with the Digital Ocean API, and works on their cloud.
+
+[harbor-wave](https://github.com/gijack/harbor-wave)
+
+Here are some example profiles that can be compiled with gen\_cloud\_template.sh
 from disk-image scripts, then used with a cloud provider as VM templates.
 
 See relevant man pages for description of formats and commands
