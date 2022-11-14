@@ -38,7 +38,7 @@ main() {
   if [ exit_code -ge 0 ];then
     exit_with_error 1 "Script threw a code, password change did not work"
    else
-    echo "Tinyproxy setup complete."
+    echo "Password Changed"
     exit 0
   fi
 }
