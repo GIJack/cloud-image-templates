@@ -11,17 +11,17 @@ features:
 Harbor Wave Payload
 ===================
 uses a config with three items: user, pass and port. item and value are
-seperated with ":"(colon), items are seperated with "="(equal sign). and uses a
-"#"(pound) for a comment.
+seperated with "="(colon), items/lines are seperated with ";"(semi-colon) and
+uses a "#"(pound) for a comment.
 
 Example
 ```
 harbor-wave spawn --payload "user=jack;pass=mypass12345;port=8888"
 ```
 
-Example payload file in
+Example using payload file
 ```
-payload_files/proxy_harborwave.payload
+harbor-wave spawn --payload "FILE:payload_files/proxy_harborwave.payload"
 ```
 
 Defaults
