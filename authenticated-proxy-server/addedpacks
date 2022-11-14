@@ -1,5 +1,8 @@
 # List of Packages to be installed, one per line, # is comments
 
+#needed for harbor-wave script
+python-is-python3
+
 # Proxy Server
 tinyproxy
 
