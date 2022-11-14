@@ -34,3 +34,7 @@ EXAMPLES:
 **authenticated-proxy-server** : Tinyproxy server with BasicAuth
 
 **basic-lamps** : Linux Apache MySQL PHP OpenSSL Application server.
+
+**basic-tor-node** : Run an onion router middle node, with no in or outputs.
+This can be used to expand the network if spawned in serial with harbor-wave
+and in great numbers
