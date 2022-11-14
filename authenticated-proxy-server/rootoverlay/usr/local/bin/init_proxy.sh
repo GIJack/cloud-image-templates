@@ -57,15 +57,16 @@ main() {
   
   # Generate new config line
   authline="BasicAuth ${proxyuser} ${password}"
+  portline="Port ${port}"
   # update tinyproxy config
-  sed -ie "s/^BasicAuth.*/${authline}/" "${CONFIG}" || exit_code+=1
-  [ ! -z ${portinput} ] && sed -ie "s/^Port.*/Port ${portinput}/" "${CONFIG}" || exit_code+=1
+  echo "${authline}" >> "${CONFIG}" || exit_code+=1
+  echo "${porline}" >> "${CONFIG}" || exit_code+=1
   
   # Update iptables config
   iptables_line="-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports ${port} -j ACCEPT # Proxy Server(tiny proxy)"
   ip6tables_line="-A INPUT -m multiport -p tcp --dports ${port} -j ACCEPT # Proxy Server(tiny proxy)"
-  sed -ie "s/.*# Proxy Server(tiny proxy)$/${iptables_line}" "${IPTABLES_CONFIG}"
-  sed -ie "s/.*# Proxy Server(tiny proxy)$/${ip6tables_line}" "${IP6TABLES_CONFIG}"
+  echo "${iptables_line}" >> "${IPTABLES_CONFIG}"
+  echo "${ip6tables_line}" >> "${IP6TABLES_CONFIG}"
   
   # enable and start tinyproxy
   systemctl restart iptables ip6tables || exit_code+=1
