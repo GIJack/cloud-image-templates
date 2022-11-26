@@ -38,3 +38,6 @@ EXAMPLES:
 **basic-tor-node** : Run an onion router middle node, with no in or outputs.
 This can be used to expand the network if spawned in serial with harbor-wave
 and in great numbers
+
+**tor-snowflake** : Generate a node running TOR's snowflake proxy. For more
+information see: https://snowflake.torproject.org/
