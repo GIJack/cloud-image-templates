@@ -20,7 +20,7 @@ DEBDISTRO="stable"
 # Name of project, version, and the OS Archecture. Arch follows same standards
 # As upstream Arch Linux. 0 and null versions will be ignored.
 PROJECT_NAME="TOR Snowflake Node"
-PROJECT_VER=1
+PROJECT_VER=1.0
 PROJECT_ARCH="amd64"
 PROJECT_DESCRIPTION="Run docker tor snowflake on debian. See: https://snowflake.torproject.org/"
 
