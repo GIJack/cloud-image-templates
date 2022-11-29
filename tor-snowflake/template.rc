@@ -60,7 +60,7 @@ SYSTEMSERVICES="docker harborwave-runonce"
 
 # List of additional packages to install, beyond base. Text editors are not
 # provided by default. It would be wise to pick one
-EXTRAPACKAGES="nano docker-compose"
+EXTRAPACKAGES="nano docker-compose docker.io"
 #EXTRA_PACKAGES="nano vi emacs-nox"
 
 # List of extra kernel modules to be included in the initcpio image
