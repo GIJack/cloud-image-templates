@@ -2,6 +2,7 @@
 Description=Harbor-wave Metadata RunOnce
 After=network.target
 After=local-fs.target
+After=docker.service
 
 [Service]
 Type=oneshot
