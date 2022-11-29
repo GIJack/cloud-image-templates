@@ -46,12 +46,12 @@ submsg(){
 }
 exit_with_error(){
   echo 1>&2 "the_blizzard.sh: ERROR: ${2}"
-  logger "the_blizzard.sh: ERROR: ${2}"
+  logger "the_blizzard.sh ERROR: ${2}"
   exit ${1}
 }
 warn(){
   echo 1>&2 "the_blizzard.sh: WARN: ${@}"
-  logger "the_blizzard.sh: WARN: ${@}"
+  logger "the_blizzard.sh WARN: ${@}"
   echo "WARN: ${@}" >> "${MAIL_FILE}"
 }
 
