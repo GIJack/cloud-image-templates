@@ -1,0 +1,6 @@
+# Change this to username you will run script as
+SCRIPT_USER=user
+
+# Script starts at midnight each day... 
+# min hour day month day-of-week
+0 0 * * * ${SCRIPT_USER} /usr/local/bin/the_blizard.sh
