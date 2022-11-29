@@ -121,7 +121,8 @@ main(){
   sleep ${WAIT_TIME}
   message "I LIVE. GET YOUR GOLASHES, HERE COMES THE SNOW!"
   
-  # The logic
+  # The logic. Yes, this could probably be factored more for abritrary number of
+  # dates. That is going to get dicey in shell tho
   if [ ${DAY_OF_MONTH} == ${DATES[0]} ];then
     rotate_flights "${FLIGHTS[0]}" "${FLIGHTS[1]}"
     activated=1
