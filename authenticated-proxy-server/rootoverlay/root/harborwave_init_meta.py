@@ -239,7 +239,7 @@ def main():
     WARNS += write_environment(data)
     
     submsg("Configuring TinyProxy and setting iptables listen")
-    WARNS += proc_payload(data)
+    WARNS += proc_payload(data['payload'])
     
     submsg("restarting daemons")
     WARNS += enable_restart_services()
