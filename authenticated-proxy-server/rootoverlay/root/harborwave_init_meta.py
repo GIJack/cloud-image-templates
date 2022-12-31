@@ -72,7 +72,7 @@ def strip_commmens(in_file):
             continue
         line = line.split(comment)
         if line[0] != "":
-            out_lines += line[0]
+            out_lines.append(line[0])
     out_file = " ".join(out_lines)
     return out_file
 
