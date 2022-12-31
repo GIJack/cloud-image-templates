@@ -16,12 +16,17 @@
 -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 
 # Inputs
--A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 22 -j ACCEPT # SSH
-#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 8888 -j ACCEPT # Proxy Server(tiny proxy)
+# SSH
+-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 22 -j ACCEPT
+# Proxy Server(tiny proxy) this is added last by script in this ver
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 8888 -j ACCEPT
 
 # Outputs
--A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 53 -j ACCEPT # DNS
--A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 123 -j ACCEPT # NTP
--A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 80,443,8080 -j ACCEPT # HTTP/HTTPS
+# DNS
+-A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 53 -j ACCEPT
+ # NTP
+-A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 123 -j ACCEPT
+ # HTTP/HTTPS
+-A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 80,443,8080 -j ACCEPT 
 
-COMMIT
+# COMMIT # - this line needs to be added by script or does not work

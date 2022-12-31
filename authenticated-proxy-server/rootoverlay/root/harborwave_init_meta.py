@@ -174,8 +174,13 @@ def proc_payload(data):
         warn("Could not write payload to " + payload_file)
         return 1
     
-    iptables_line  = "-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports " + port + " -j ACCEPT # Proxy Server(tiny proxy)"
-    ip6tables_line = "-A INPUT -m multiport -p tcp --dports " + port + " -j ACCEPT # Proxy Server(tiny proxy)"
+    # Add iptables firewall lines to end of file
+    iptables_line   = "# Proxy Server(tiny proxy)"
+    iptables_line  += "-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports " + port + " -j ACCEPT"
+    iptables_line  += "\nCOMMIT\n"
+    ip6tables_line  = "# Proxy Server(tiny proxy)"
+    ip6tables_line  += "-A INPUT -m multiport -p tcp --dports " + port + " -j ACCEPT"
+    ip6tables_line  += "\nCOMMIT\n"
     
     iptables_errors = 0
     try:
