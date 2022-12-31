@@ -184,7 +184,7 @@ def proc_payload(data):
         iptables_errors += 1
     try:
         file_obj = open(ip6tables_file,"a")
-        file_obj.write(ip6ables_line)
+        file_obj.write(ip6tables_line)
         file_obj.close()
     except:
         warn("Could not write ip6tables file")
