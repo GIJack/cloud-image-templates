@@ -15,13 +15,18 @@
 -A INPUT -p icmp --icmp-type echo-request -j ACCEPT
 -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 
-# Inputs
--A INPUT -m multiport -p tcp --dports 22 -j ACCEPT # SSH
--A INPUT -m multiport -p tcp --dports 8888 -j ACCEPT # Proxy Server(tiny proxy)
+## Inputs
+# SSH
+-A INPUT -m multiport -p tcp --dports 22 -j ACCEPT
+# Proxy Server(tiny proxy)
+-A INPUT -m multiport -p tcp --dports 8888 -j ACCEPT
 
-# Outputs
--A OUTPUT -m multiport -p udp --dports 53 -j ACCEPT # DNS
--A OUTPUT -m multiport -p udp --dports 123 -j ACCEPT # NTP
--A OUTPUT -m multiport -p tcp --dports 80,443,8080 -j ACCEPT # HTTP/HTTPS
+## Outputs
+# DNS
+-A OUTPUT -m multiport -p udp --dports 53 -j ACCEPT
+# NTP
+-A OUTPUT -m multiport -p udp --dports 123 -j ACCEPT
+# HTTP/HTTPS
+-A OUTPUT -m multiport -p tcp --dports 80,443,8080 -j ACCEPT
 
 COMMIT
