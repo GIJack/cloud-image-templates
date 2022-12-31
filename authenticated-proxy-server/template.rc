@@ -37,7 +37,7 @@ AUTHOR_CONTACT="irc:libera.chat:GI_Jack"
 
 #Posix Timezone. Images created with this template will use this timezone. UTC
 # is the default. see timedatectl list-timezones for valid entries
-TIMEZONE="America/New_York"
+TIMEZONE="America/Los_Angeles"
 
 # Added for future compatibility. Does nothing, and EXT4 will always be used
 FILESYSTEM="ext4"
