@@ -62,7 +62,7 @@ def do_log(message):
     log_obj.write(out_message)
     log_obj.close()
 
-def strip_commmens(in_file):
+def strip_commments(in_file):
     '''Strip comments from a text file. Takes one var, a  string, returns a string with comments stripped'''
     comment="#"
     out_lines = []
