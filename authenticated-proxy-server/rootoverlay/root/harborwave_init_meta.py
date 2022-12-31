@@ -161,6 +161,9 @@ def proc_payload(data):
     add_lines  = "BasicAuth " + user + " " + password + "\n"
     add_lines += "Port " + port + "\n"
     
+    # WORKAROUND FOR BUG: https://bugs.archlinux.org/task/66616
+    add_lines += "PidFile \"/run/tinyproxy/tinyproxy.pid\"" + "\n"
+    
     ## Now write
     payload_file = config['tinyproxy-config']
     try:
