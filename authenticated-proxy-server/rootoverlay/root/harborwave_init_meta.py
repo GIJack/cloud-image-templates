@@ -133,7 +133,7 @@ def proc_payload(data):
     
     # Start with defaults
     user     = defaults['user']
-    password = defaults['password']
+    password = defaults['pass']
     port     = defaults['port']
     
     # Get data from payload
