@@ -11,10 +11,10 @@ COMPRESS_OPTS=""
 
 # Name of project, version, and the OS Archecture. Arch follows same standards
 # As upstream Arch Linux. 0 and null versions will be ignored.
-PROJECT_NAME="Basic Proxy Server"
+PROJECT_NAME="Authenticated Proxy Server"
 PROJECT_VER=0
 PROJECT_ARCH="any"
-PROJECT_DESCRIPTION="A Basic HTTP proxy server using tinyproxy"	# Optional
+PROJECT_DESCRIPTION="Tinyproxy HTTP Proxy that has username and password authentication"	# Optional
 
 # Name and Contact of maintainers. This section is optional
 AUTHOR_NAME="GI Jack"
