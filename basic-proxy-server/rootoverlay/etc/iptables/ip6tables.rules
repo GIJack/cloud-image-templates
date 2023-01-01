@@ -12,8 +12,9 @@
 -A INPUT -i lo -j ACCEPT
 
 # Allow pings, this is super helpful for diagnostics
--A INPUT -p icmp --icmp-type echo-request -j ACCEPT
--A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
+# Doesn't work with IPv6
+#-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+#-A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
 
 ## Inputs
 # SSH
