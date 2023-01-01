@@ -28,6 +28,6 @@
 # NTP
 -A OUTPUT -m multiport -p udp --dports 123 -j ACCEPT
 # HTTP/HTTPS
--A OUTPUT -m multiport -p tcp --dports 80,443,8080 -j ACCEPT 
+-A OUTPUT -m multiport -p tcp --dports 80,443 -j ACCEPT 
 
 # COMMIT # Added back by script after rules
