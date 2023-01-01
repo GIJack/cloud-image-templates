@@ -24,9 +24,9 @@
 # Outputs
 # DNS
 -A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 53 -j ACCEPT
- # NTP
+# NTP
 -A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 123 -j ACCEPT
- # HTTP/HTTPS
+# HTTP/HTTPS
 -A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 80,443,8080 -j ACCEPT 
 
 # COMMIT # - this line needs to be added by script or does not work
