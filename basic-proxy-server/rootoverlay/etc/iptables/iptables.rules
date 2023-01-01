@@ -27,6 +27,6 @@
 # NTP
 -A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 123 -j ACCEPT 
 # HTTP/HTTPS
--A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 80,443,8080 -j ACCEPT
+-A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 80,443 -j ACCEPT
 
 COMMIT
