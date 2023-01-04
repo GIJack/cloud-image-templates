@@ -27,6 +27,9 @@ harbor-wave spawn --payload "FILE:payload_files/proxy_harborwave.payload"
 Defaults
 ========
 Default Username, Password and Port
-User	proxyuser
-Pass	proxypass
-port	8888
+
+User | **proxyuser**  |
+----------------------|
+Pass | **proxypass**  |
+----------------------|
+port |**8888**        |
