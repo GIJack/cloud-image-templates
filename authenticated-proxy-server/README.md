@@ -1,4 +1,4 @@
-Basic Proxy Server
+Authenticated Proxy Server
 ==================
 This is a basic tinyproxy based HTTP Proxy server.
 
