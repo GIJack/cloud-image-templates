@@ -28,8 +28,9 @@ Defaults
 ========
 Default Username, Password and Port
 
-User | **proxyuser**  |
-----------------------|
-Pass | **proxypass**  |
-----------------------|
-port |**8888**        |
+
+User **proxyuser** 
+
+Pass **proxypass**
+
+port **8888**
