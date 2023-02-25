@@ -1,0 +1,37 @@
+# List of Packages to be installed, one per line, # is comments
+
+
+#Utils
+# Install python3 as default python interpreter
+python-is-python3
+
+## LEMPS(Linix, (e)Nginx, MySQL, PHP, OpenSSL)
+# Nginx
+nginx
+
+#MariaDB(MySQL implementation)
+mariadb-server
+mariadb-client
+
+#PHP
+php
+php-fpm
+php-apcu
+php-apcu-bc
+php-bcmath
+php-mysql
+php-curl
+php-gd
+php-gmp
+php-igbinary
+php-imap
+php-intl
+php-json
+php-ldap
+php-mbstring
+php-redis
+php-xml
+php-zip
+
+#OpenSSL
+openssl

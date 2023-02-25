@@ -41,3 +41,5 @@ and in great numbers
 
 **tor-snowflake** : Generate a node running TOR's snowflake proxy. For more
 information see: https://snowflake.torproject.org/
+
+**nextcloud-server** : a nextcloud instance. see https://nextcloud.com
