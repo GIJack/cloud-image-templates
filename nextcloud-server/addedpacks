@@ -29,6 +29,7 @@ php-intl
 php-json
 php-ldap
 php-mbstring
+php-pear
 php-redis
 php-xml
 php-zip
