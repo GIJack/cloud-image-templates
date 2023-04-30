@@ -1,0 +1,5 @@
+implement Lets Encrypt! with certbot
+
+use
+
+/var/lib/znc/.znc/znc.pem is where certs. Public, Private and DH Parameters

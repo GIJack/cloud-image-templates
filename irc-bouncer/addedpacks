@@ -1,0 +1,7 @@
+# List of Packages to be installed, one per line, # is comments
+
+# the bouncer
+vnc
+
+# for env script
+python
