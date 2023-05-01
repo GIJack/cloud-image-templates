@@ -10,6 +10,7 @@ import json
 import urllib.request
 from http.client import responses as http_responses
 from datetime import datetime
+import subprocess
 
 config = {
     'host'        : '169.254.169.254',
@@ -18,7 +19,8 @@ config = {
     'logfile'     : "/var/log/harbor-wave-init.log",
     'app-dir'     : '/opt/harborwave',
     'done-file'   : '/opt/harborwave/done',
-    'needed-keys' : ['sequence', 'base-name', 'payload', 'payload-filename'],
+    'needed-keys' : ['sequence', 'base-name', 'payload', 'payload-filename', 'domain'],
+    'znc_runonce' : "/root/certbot_znc_update.sh"
 }
 
 def message(message):
@@ -119,6 +121,10 @@ def write_payload(data):
     
     return 0
 
+def run_znc_script(script_file):
+    error_code = subprocess.check_call(["/usr/bin/bash",script_file,"firstrun"])
+    return error_code
+
 def write_done():
     '''Touch /opt/harbor-wave/done so we know this script ran already'''
     done_file = config['done-file']
@@ -151,6 +157,9 @@ def main():
     
     submsg("Extracting payload")
     WARNS += write_payload(data)
+    
+    submsg("Initialize Lets Encrypt! certs for ZNC")
+    run_znc_script(config['znc_runonce'])
     
     submsg("Writing donefile")
     WARNS += write_done()
