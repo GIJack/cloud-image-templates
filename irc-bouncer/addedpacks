@@ -5,3 +5,7 @@ vnc
 
 # for env script
 python
+
+#monitoring
+rsyslog
+ninja-ids

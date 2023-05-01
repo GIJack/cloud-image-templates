@@ -56,7 +56,7 @@ BOOTLOADER="syslinux" # Use for Arch Linux
 #BOOTLOADER="extlinux" # Use for Debian
 
 # List of additional services to enable.
-SYSTEMSERVICES="harborwave-runonce znc"
+SYSTEMSERVICES="harborwave-runonce znc certbot-renew-custom"
 
 # List of additional packages to install, beyond base. Text editors are not
 # provided by default. It would be wise to pick one
