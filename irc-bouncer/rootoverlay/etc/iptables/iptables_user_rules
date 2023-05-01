@@ -1,0 +1,27 @@
+# If you are using Ninja IDS, All modifications or additions to firewall rules
+# go in here.  Comment character is #, and lines are loaded by iptables
+# command line, one at a time. Nothing outside the IP4RULES and IPV6RULES
+# variables is proccessed.
+
+# Chains LOG_ACCEPT and LOG_DENY can be used in place of ACCEPT and DENY
+# to log traffic for proccessing(with PSAD)
+
+# Note use -I rules to put the rules at the top of list. If you use -A they will
+# be after the default rules and not run
+
+### Rules - IPv4
+IPV4RULES='
+# Incomming SSH, allow connections, but log anyway
+-I INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 22 -j ACCEPT
+
+# Allow IRC but log. Expect hell
+-I INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 6697 -j LOG_ACCEPT
+'
+### Rules - IPv6
+IPV6RULES='
+# Incomming SSH, allow connections. We trust enough to not log
+-I INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 22 -j ACCEPT
+
+# Allow IRC, but log. Expect hell
+-I INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 6697 -j LOG_ACCEPT
+'

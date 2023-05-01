@@ -20,7 +20,8 @@ exit_with_error(){
 main() {
   # code goes here
   message "Running user run-once code for intializing template"
-  
+  #enable Ninja IDS
+  ninja-ids-ctl.sh enable
   exit 0
 }
 
