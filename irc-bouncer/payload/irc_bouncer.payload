@@ -1,10 +1,18 @@
 # Fill This out
+## Bouncer
+# Connection
+port=6697
+no_tls=false
+# Admin
 admin_user=admin
 admin_pass=QWK3Ex8fyfW084bfKyG0wygPSgxbYyjy
-
+# unpriveldged account
 user=username
 pass=LyXFPaPp8FYX
 
-port=6697
-no_tls=false
-server=libra.chat:irc.libra.chat:user:60i3Twrb4CXUXwVNxIsz18PeJbuEqS3B
+##IRC stuff
+server=libra.chat:irc.libra.chat:ereet_handle:60i3Twrb4CXUXwVNxIsz18PeJbuEqS3B
+nick=libera.chat:ereet_handle:X_ERREET_X
+full_name=libera.chat:"Ereet Haxor"
+chan_list=libra.chat:#Channel1,#channel2
+

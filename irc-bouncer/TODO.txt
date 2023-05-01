@@ -1,5 +1,24 @@
 implement Lets Encrypt! with certbot
 
-use
+Network Modules - cert/sasl
 
-/var/lib/znc/.znc/znc.pem is where certs. Public, Private and DH Parameters
+NOTE: + on port for TLS
+
+%PORT% - Int for port to connect to bouncer
+%SSL%  - Bool true/false to use TLS/SSL to connect to bouncer. default to true
+
+%ADMIN_USER% - Username to log in to bouncer with
+%ADMIN_PASSWORD% - password to log into bouncer with
+
+%NICK%
+%ALT_NICK% - second parameter from nick
+%FULL_NAME% - Real Name/Full Name field
+
+Server specific
+%NET_NAME% - name of IRC network
+%IRC_SERVER% - address of the server
+%IRC_PORT% - int with port number. prefix with + for TLS/SSL
+%IRC_PASSWORD% - password. blank if using certs with SASL
+
+One per channel
+%CHAN% - single IRC channel attached to a server

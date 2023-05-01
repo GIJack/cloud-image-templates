@@ -1,0 +1,9 @@
+	<Network %NET_NAME%>
+		LoadModule = simple_away
+		LoadModule = cert
+                LoadModule = sasl
+		Server     = %IRC_SERVER% %IRC_PORT% %IRC_PASSWORD%
+
+		<Chan #channel>
+		</Chan>
+	</Network>
