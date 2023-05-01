@@ -7,5 +7,4 @@ vnc
 python
 
 #monitoring
-rsyslog
 ninja-ids
