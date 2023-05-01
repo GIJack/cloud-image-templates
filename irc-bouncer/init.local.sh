@@ -21,9 +21,6 @@ main() {
   # code goes here
   message "Running user run-once code for intializing template"
   
-  # fix resolv.conf
-  rm -f /etc/resolv.conf
-  ln -s /usr/lib/systemd/resolv.conf /etc/resolv.conf
   exit 0
 }
 
