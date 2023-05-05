@@ -7,5 +7,8 @@ vnc
 python
 certbot
 
-# An Early Warning system
-ninja-ids
+# diagnostics and controls
+ninja-ids # early warning system, bouncers, serious business
+iftop
+iotop
+htop
