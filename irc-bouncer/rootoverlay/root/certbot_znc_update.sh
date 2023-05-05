@@ -8,7 +8,7 @@ Runonce that runs certbot, and the updates znc with Lets Encrypt! certs, so
 it works with LE certs.
 
     USAGE:
-    ./do_lets_encrypt [firstrun|renew|help]
+    ./certbot_znc_update.sh [firstrun|renew|help]
 EOF
   exit 4
 }
