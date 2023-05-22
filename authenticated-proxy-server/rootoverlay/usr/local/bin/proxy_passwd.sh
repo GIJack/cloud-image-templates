@@ -41,10 +41,11 @@ main() {
   if [ -z "${password}" ];then
     while [ -z "${password}" ];do
       read -rs -p "New Proxy Password: " password
+      echo ""
     done
-    echo ""
     while [ -z "${confirm_password}" ];do
       read -rs -p "Confirm New Password: " confirm_password
+      echo ""
     done
     [ "${password}" != "${confirm_password}" ] && exit_with_error 2 "Entries did not match, not changing password"
   fi
