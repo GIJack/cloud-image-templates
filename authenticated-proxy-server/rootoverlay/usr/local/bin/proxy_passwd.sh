@@ -26,6 +26,7 @@ exit_with_error(){
 main() {
   local exit_code=0
   local password="${1}"
+  local confirm_password=""
   local proxyuser=""
   
   [ "${1}" == "--help" ] && help_and_exit
@@ -35,12 +36,17 @@ main() {
   # Get username from config
   proxyuser=$(grep -e "^BasicAuth.*" "${TINYPROXY_CONF_FILE}"|cut -d " " -f 2) || exit_code+=1
   
-  # get new password
-  while [ -z "${password}" ];do
-    read -rs -p "Proxy Password: " password
-  done
-  # Check to make sure password exists
-  [ -z "${password}" ] && exit_with_error 2 "Needs password! see --help"
+  # get new password. If one wasn't provided, prompt for one. Then ask for
+  # confirmation
+  if [ -z "${password}" ];then
+    while [ -z "${password}" ];do
+      read -rs -p "New Proxy Password: " password
+    done
+    while [ -z "${confirm_password}" ];do
+      read -rs -p "Confirm New Password: " confirm_password
+    done
+    [ "${password}" != "${confirm_password}" ] && exit_with_error 2 "Entries did not match, not changing password"
+  fi
   
   # Generate new config line
   authline="BasicAuth ${proxyuser} ${password}"
