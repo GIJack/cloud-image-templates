@@ -23,7 +23,7 @@ config = {
     'app-dir'          : '/opt/harborwave',
     'done-file'        : '/opt/harborwave/done',
     'tinyproxy-config' : '/etc/tinyproxy/tinyproxy.conf',
-    'stunnel-config'   : '/etc/stunnel/stunnel.conf'
+    'stunnel-config'   : '/etc/stunnel/stunnel.conf',
     'iptables-file'    : '/etc/iptables/iptables.rules',
     'ip6tables-file'   : '/etc/iptables/ip6tables.rules',
     'cerbot-script'    : "/root/do_certbot.sh"
@@ -32,8 +32,8 @@ config = {
 defaults = {
     'user'     : 'proxyuser',
     'pass'     : 'proxypass',
-    'port'     : '8888'
-    'tls_port' : "8443"
+    'port'     : '8888',
+    'tls_port' : '8443'
 }
 
 def message(message):
@@ -109,7 +109,8 @@ def get_data(config):
             missing_keys.appennd(item)
     if missing_keys != []:
         missing_keys = ",".join(missing_keys)
-        exit_with_error(9,"Missing JSON items " + missing keys + ": are you sure this is a harbor-wave VM?")
+        error_line = "Missing JSON items " + missing_keys + ": are you sure this is a harbor-wave VM?"
+        exit_with_error(9,error_line)
     
     return output_data
 
@@ -195,7 +196,6 @@ def proc_payload(data):
         warn("Could not read Stunnel config: " + stunnel_conf_file)
         read_errors += 1
         
-    fqdn = platform.node() +
     # replace variables with their values
     stunnel_conf = stunnel_conf.replace("%TLS_PORT%",tls_port)
     stunnel_conf = stunnel_conf.replace("%PORT%",port)
