@@ -1,3 +1,4 @@
+## Payload for Authenticated Proxy Server image
 # use with --payload "FILE:/path/to/proxy_harborwave.payload" in harborwave
 # Comment is #. lines are ended with a ;
 
