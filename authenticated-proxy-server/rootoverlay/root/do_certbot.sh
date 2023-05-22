@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Because this is run on firstrun,
+source /etc/environment
+
 help_and_exit(){
   cat 1>&2 << EOF
 do_certbot.sh
@@ -14,7 +17,7 @@ EOF
 }
 ### VARIABLES
 # Edit this before use. This is what email your LETS ENCRYPT! certs are registered to
-readonly LETSENCRYPT_EMAIL="postmaster@example.com"
+readonly LETSENCRYPT_EMAIL="postmaster@goatse.fu"
 
 ### /VARIABLES
 
@@ -41,13 +44,26 @@ exit_with_error(){
 }
 
 init_certbot(){
-  certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || errors+=1
-  return ${?}
+  local -i error_code=0
+  local iptables_string="INPUT -m tcp -p tcp --dport 80 -j ACCEPT"
+  iptables -I ${iptables_string} || return 9
+ 
+  certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || error_code=${?}
+ 
+  iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
+  return ${error_code}
 }
 
 renew_certbot(){
-  /usr/bin/certbot -q renew
-  return ${?}
+  local -i error_code=0
+  local iptables_string="INPUT -m tcp -p tcp --dport 80 -j ACCEPT"
+  iptables -I ${iptables_string} || return 9
+ 
+  certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || error_code=${?}
+ 
+  iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
+  return ${error_code}
+}
 }
 
 main(){
