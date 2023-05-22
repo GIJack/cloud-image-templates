@@ -286,7 +286,7 @@ def main():
     submsg("Writing to Environment File")
     WARNS += write_environment(data)
     
-    submsg("Configuring TinyProxy and setting iptables listen")
+    submsg("Configuring TinyProxy, Stunnel, and IPTables")
     WARNS += proc_payload(data)
     
     submsg("Restarting Daemons")
