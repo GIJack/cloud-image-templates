@@ -17,7 +17,7 @@ EOF
 }
 ### VARIABLES
 # Edit this before use. This is what email your LETS ENCRYPT! certs are registered to
-readonly LETSENCRYPT_EMAIL="postmaster@goatse.fu"
+readonly LETSENCRYPT_EMAIL="postmaster@goatse.camera"
 
 ### /VARIABLES
 
@@ -63,7 +63,6 @@ renew_certbot(){
  
   iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
   return ${error_code}
-}
 }
 
 main(){
