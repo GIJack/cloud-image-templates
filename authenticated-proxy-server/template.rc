@@ -19,12 +19,11 @@ PROJECT_DESCRIPTION="Tinyproxy HTTP Proxy that has username and password authent
 # Name and Contact of maintainers. This section is optional
 AUTHOR_NAME="GI Jack"
 AUTHOR_ORG="" #Organization
-AUTHOR_EMAIL=""
+AUTHOR_EMAIL="GI_Jack@hackermail.com"
 AUTHOR_GPG_SIG="" # Must match AUTHOR_EMAIL
 # space seperated list of additional contact info in the format of
 # protocol:address. Example. for IRC use IRC:<NETWORK>:<NICK|IRC address>
 #AUTHOR_CONTACT="protocol1:address protocol2:instance:address"
-AUTHOR_CONTACT="irc:libera.chat:GI_Jack"
 
 ### /Project Metadata ###
 
