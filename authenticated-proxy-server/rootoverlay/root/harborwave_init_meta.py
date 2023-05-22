@@ -248,8 +248,13 @@ def enable_restart_services():
         try:
             exit_code += subprocess.check_call(['systemctl', 'restart', item])
         except:
-            warn("Could Not resstart service: " + item)
-        exit_code += subprocess.check_call(['systemctl', 'enable', item])
+            warn("Could Not Restart Service: " + item)
+            exit_code += 1
+        try:
+            exit_code += subprocess.check_call(['systemctl', 'enable', item])
+        except:
+            warn("Could Not Enable Service: " + item)
+            exit_code += 1
         
     if exit_code > 0:
         return 1
