@@ -17,6 +17,11 @@ EOF
   exit 4
 }
 
+exit_with_error(){
+  echo 1>&2 "proxy_password.sh: ERROR: ${2}"
+  exit ${1}
+}
+
 main() {
   local exit_code=0
   local password="${1}"
