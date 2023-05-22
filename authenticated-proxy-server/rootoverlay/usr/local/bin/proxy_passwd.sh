@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-# 
-CONFIG=/etc/tinyproxy/tinyproxy.conf
+### CONFIG
+TINYPROXY_CONF_FILE=/etc/tinyproxy/tinyproxy.conf
+### /CONFIG
 
 help_and_exit(){
   cat 1>&2 << EOF
@@ -32,7 +33,7 @@ main() {
   echo "Changing Tinyproxy password..."
   
   # Get username from config
-  proxyuser=$(grep -e "^BasicAuth.*" "${CONFIG}"|cut -d " " -f 2) || exit_code+=1
+  proxyuser=$(grep -e "^BasicAuth.*" "${TINYPROXY_CONF_FILE}"|cut -d " " -f 2) || exit_code+=1
   
   # get new password
   while [ -z "${password}" ];do
@@ -44,12 +45,12 @@ main() {
   # Generate new config line
   authline="BasicAuth ${proxyuser} ${password}"
   # update tinyproxy config
-  sed -ie "s/^BasicAuth.*/${authline}/" "${CONFIG}" || exit_code+=1
+  sed -ie "s/^BasicAuth.*/${authline}/" "${TINYPROXY_CONF_FILE}" || exit_code+=1
   
   # Restart to apply
   systemctl restart tinyproxy || exit_code+=1
   
-  if [ ${exit_code} -ge 0 ];then
+  if [ ${exit_code} -gt 0 ];then
     exit_with_error 1 "Script threw a code, password change did not work"
    else
     echo "Password Changed"
