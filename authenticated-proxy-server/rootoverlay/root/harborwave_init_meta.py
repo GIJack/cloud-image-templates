@@ -265,7 +265,7 @@ def run_certbot_script(script_file):
     try:
         error_code = subprocess.check_call(["/usr/bin/bash",script_file,"firstrun"])
     except:
-        warn("Certbot failed, without certs, stunnel will not work")
+        warn("Certbot failed, without certs stunnel will not work")
         error_code = 1
     return error_code
 
