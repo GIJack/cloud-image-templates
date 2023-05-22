@@ -292,7 +292,7 @@ def main():
     submsg("Restarting Daemons")
     WARNS += enable_restart_services()
     
-    submsg("Running Getting TLS Certs from Lets Encrypt!")
+    submsg("Getting TLS Certs from Lets Encrypt!")
     WARNS += run_certbot_script(config['certbot-script'])
     
     submsg("Writing Donefile")
