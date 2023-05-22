@@ -42,6 +42,7 @@ main() {
     while [ -z "${password}" ];do
       read -rs -p "New Proxy Password: " password
     done
+    echo ""
     while [ -z "${confirm_password}" ];do
       read -rs -p "Confirm New Password: " confirm_password
     done
