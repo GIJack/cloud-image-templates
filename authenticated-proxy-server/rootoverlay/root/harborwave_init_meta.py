@@ -257,7 +257,11 @@ def enable_restart_services():
         return 0
 
 def run_certbot_script(script_file):
-    error_code = subprocess.check_call(["/usr/bin/bash",script_file,"firstrun"])
+    try:
+        error_code = subprocess.check_call(["/usr/bin/bash",script_file,"firstrun"])
+    except
+        warn("Certbot failed, without certs, stunnel will not work")
+        error_code = 1
     return error_code
 
 def write_done():
