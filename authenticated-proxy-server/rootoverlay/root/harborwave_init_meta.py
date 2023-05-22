@@ -154,6 +154,7 @@ def proc_payload(data):
     payload = payload.split(line_seperator)
     data_dict = {}
     for item in payload:
+        item = item.strip()
         item = item.split(field_seperator)
         # If there is no value, skip
         if len(item) < 2:
