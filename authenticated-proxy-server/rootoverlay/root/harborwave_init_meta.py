@@ -26,7 +26,7 @@ config = {
     'stunnel-config'   : '/etc/stunnel/stunnel.conf',
     'iptables-file'    : '/etc/iptables/iptables.rules',
     'ip6tables-file'   : '/etc/iptables/ip6tables.rules',
-    'cerbot-script'    : "/root/do_certbot.sh"
+    'certbot-script'    : "/root/do_certbot.sh"
 }
 
 defaults = {
@@ -282,6 +282,7 @@ def main():
     
     # ensure directory is available
     os.makedirs(config['app-dir'],mode=0o755,exist_ok=True)
+    
     
     submsg("Retrieving Data")
     data = get_data(config)
