@@ -144,7 +144,7 @@ def proc_payload(data):
     password = defaults['pass']
     port     = defaults['port']
     tls_port = defaults['tls_port']
-    fqdn     = platform.node() + data['domain']
+    fqdn     = platform.node() + "." + data['domain']
     
     line_seperator  = ";"
     field_seperator = "="
@@ -244,7 +244,10 @@ def enable_restart_services():
     services = [ "tinyproxy", "iptables", "ip6tables","stunnel"]
     exit_code = 0
     for item in services:
-        exit_code += subprocess.check_call(['systemctl', 'restart', item])
+        try:
+            exit_code += subprocess.check_call(['systemctl', 'restart', item])
+        except:
+            warn("Could Not resstart service: " + item)
         exit_code += subprocess.check_call(['systemctl', 'enable', item])
         
     if exit_code > 0:
