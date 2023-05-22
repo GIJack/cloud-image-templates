@@ -6,6 +6,10 @@ python
 # Proxy Server
 tinyproxy
 
+# TLS encryption
+stunnel
+certbot
+
 # system tools
 sysstat
 htop
@@ -13,10 +17,11 @@ iotop
 lsof
 
 # Base TCP/IP diagnostic tools
-whois
 net-tools
+inetutils
 bind
 traceroute
+iftop
 
 #extra
 bash-completion

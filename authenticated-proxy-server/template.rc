@@ -12,7 +12,7 @@ COMPRESS_OPTS=""
 # Name of project, version, and the OS Archecture. Arch follows same standards
 # As upstream Arch Linux. 0 and null versions will be ignored.
 PROJECT_NAME="Authenticated Proxy Server"
-PROJECT_VER=1.0.1
+PROJECT_VER=1.0.2
 PROJECT_ARCH="any"
 PROJECT_DESCRIPTION="Tinyproxy HTTP Proxy that has username and password authentication"	# Optional
 
@@ -48,7 +48,7 @@ KERNEL="linux-lts"
 BOOTLOADER="syslinux"
 
 # List of additional services to enable.
-SYSTEMSERVICES="iptables ip6tables harborwave-runonce tinyproxy"
+SYSTEMSERVICES="iptables ip6tables harborwave-runonce tinyproxy stunnel"
 
 # List of additional packages to install, beyond base. Text editors are not
 # provided by default. It would be wise to pick one. See addedpacks for 
