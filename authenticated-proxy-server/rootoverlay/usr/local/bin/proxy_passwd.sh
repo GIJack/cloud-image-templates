@@ -44,7 +44,7 @@ main() {
   # Restart to apply
   systemctl restart tinyproxy || exit_code+=1
   
-  if [ exit_code -ge 0 ];then
+  if [ ${exit_code} -ge 0 ];then
     exit_with_error 1 "Script threw a code, password change did not work"
    else
     echo "Password Changed"
