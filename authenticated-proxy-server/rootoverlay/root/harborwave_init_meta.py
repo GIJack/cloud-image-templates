@@ -289,11 +289,11 @@ def main():
     submsg("Configuring TinyProxy, Stunnel, and IPTables")
     WARNS += proc_payload(data)
     
-    submsg("Restarting Daemons")
-    WARNS += enable_restart_services()
-    
     submsg("Getting TLS Certs from Lets Encrypt!")
     WARNS += run_certbot_script(config['certbot-script'])
+    
+    submsg("Restarting Daemons")
+    WARNS += enable_restart_services()
     
     submsg("Writing Donefile")
     WARNS += write_done()
