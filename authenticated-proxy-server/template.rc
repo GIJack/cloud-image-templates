@@ -48,7 +48,7 @@ KERNEL="linux-lts"
 BOOTLOADER="syslinux"
 
 # List of additional services to enable.
-SYSTEMSERVICES="iptables ip6tables harborwave-runonce tinyproxy stunnel certbot-renew.timer"
+SYSTEMSERVICES="iptables ip6tables harborwave-runonce tinyproxy stunnel certbot-renew-custom.timer"
 
 # List of additional packages to install, beyond base. Text editors are not
 # provided by default. It would be wise to pick one. See addedpacks for 
