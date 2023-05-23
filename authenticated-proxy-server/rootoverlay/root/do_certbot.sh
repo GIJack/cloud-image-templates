@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 
-# Because this is run on firstrun,
+# Because this is run on firstrun
 source /etc/environment
 
 help_and_exit(){
   cat 1>&2 << EOF
 do_certbot.sh
 
-Runonce that runs certbot, and the updates stunnel with Lets Encrypt! certs, so
-it works with LE certs.
+Runonce that runs certbot. Has work arounds for aggressive IPtables rules.
+
+Needs to be run as root
 
     USAGE:
     ./certbot_znc_update.sh [firstrun|renew|help]
@@ -17,7 +18,7 @@ EOF
 }
 ### VARIABLES
 # Edit this before use. This is what email your LETS ENCRYPT! certs are registered to
-readonly LETSENCRYPT_EMAIL="postmaster@goatse.camera"
+readonly LETSENCRYPT_EMAIL="postmaster@example.com"
 
 ### /VARIABLES
 
@@ -69,7 +70,8 @@ main(){
   declare -i ERRORS=0
   local command="${1}"
   [ -z "${HARBORWAVE_DOMAIN}" ] && exit_with_error 2 "No Domain set, no qualified for a Lets Encrypt! cert"
-
+  [ ${EUID} -ne 0 ] && exit_with_error 2 "This script needs to be run as root."
+  
   case ${command} in
     firstrun)
       message "Initializing..."
