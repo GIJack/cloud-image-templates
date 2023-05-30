@@ -49,7 +49,7 @@ BOOTLOADER="syslinux"
 
 # List of additional services to enable.
 # Services will be enabled by runonce at load time
-SYSTEMSERVICES="harborwave-runonce certbot-renew-custom.timer"
+SYSTEMSERVICES="harborwave-runonce"
 
 # List of additional packages to install, beyond base. Text editors are not
 # provided by default. It would be wise to pick one. See addedpacks for 
