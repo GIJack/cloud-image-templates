@@ -11,16 +11,11 @@
 -A OUTPUT -o lo -j ACCEPT
 -A INPUT -i lo -j ACCEPT
 
-# Allow pings, this is super helpful for diagnostics
-# Doesn't work with IPv6
-#-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
-#-A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT
-
 # Inputs
 # SSH
 -A INPUT -m multiport -p tcp --dports 22 -j ACCEPT
 # Proxy Server(tiny proxy)
-#-A INPUT -m multiport -p tcp --dports 8888 -j ACCEPT
+-A INPUT -m multiport -p tcp --dports %PORT%,%TLS_PORT% -j ACCEPT
 
 # Outputs
 # DNS
@@ -30,4 +25,4 @@
 # HTTP/HTTPS
 -A OUTPUT -m multiport -p tcp --dports 80,443 -j ACCEPT 
 
-# COMMIT # Added back by script after rules
+COMMIT # Added back by script after rules
