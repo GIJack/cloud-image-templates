@@ -346,7 +346,7 @@ def main():
         submsg("Restarting Daemons")
         WARNS += enable_restart_services(use_fqdn=use_fqdn)
     else:
-        submsg("There were errors processing the config files, NOT restarting services. READ:" + READ_ERRORS + " WRITE:" + WRITE_ERRORS)
+        submsg("There were errors processing the config files, NOT restarting services. READ:" + str(READ_ERRORS) + " WRITE:" + str(WRITE_ERRORS) )
 
     submsg("Writing Donefile")
     WARNS += write_done()
