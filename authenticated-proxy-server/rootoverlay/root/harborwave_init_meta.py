@@ -352,7 +352,7 @@ def main():
     WARNS += write_done()
     
     if WARNS > 0:
-        message("Done, but with " + WARNS + " warning(s)")
+        message("Done, but with " + str(WARNS) + " warning(s)")
         sys.exit(1)
     else:
         message("Done")
