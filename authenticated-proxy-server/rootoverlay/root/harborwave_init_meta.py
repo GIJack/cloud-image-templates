@@ -26,7 +26,8 @@ config = {
     'stunnel-config'   : '/etc/stunnel/stunnel.conf',
     'iptables-file'    : '/etc/iptables/iptables.rules',
     'ip6tables-file'   : '/etc/iptables/ip6tables.rules',
-    'certbot-script'    : "/root/do_certbot.sh"
+    'certbot-script'   : "/root/do_certbot.sh"
+    'snakeoil-script'  : "/root/do_snakeoil.sh"
 }
 
 defaults = {
@@ -135,8 +136,8 @@ def proc_payload(data):
     '''proccess payload file for proxy config'''
     write_errors = 0
     read_errors  = 0
-    config_file   = config['tinyproxy-config']
-    iptables_file = config['iptables-file']
+    config_file    = config['tinyproxy-config']
+    iptables_file  = config['iptables-file']
     ip6tables_file = config['ip6tables-file']
     
     # Start with defaults
@@ -210,35 +211,53 @@ def proc_payload(data):
         warn("Could not write Stunnel config: " + stunnel_conf_file)
         write_errors += 1
     
-    # Add iptables firewall lines to end of file
-    ports = port + "," + tls_port
-    iptables_line   = "# Proxy Server(tiny proxy)\n"
-    iptables_line  += "-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports " + ports + " -j ACCEPT"
-    iptables_line  += "\nCOMMIT\n"
-    ip6tables_line  = "# Proxy Server(tiny proxy)\n"
-    ip6tables_line  += "-A INPUT -m multiport -p tcp --dports " + ports + " -j ACCEPT"
-    ip6tables_line  += "\nCOMMIT\n"
+    ## Do IPTables config
     
+    # First, load configs into file
+    iptables_config  = None
+    ip6tables_config = None
     try:
-        file_obj = open(iptables_file,"a")
-        file_obj.write(iptables_line)
+        file_obj = open(iptables_file,"r")
+        iptables_config = file_obj.read()
         file_obj.close()
     except:
-        warn("Could not write iptables file")
-        write_errors += 1
+        warn("Could not read iptables config")
+        read_errors += 1
+        
     try:
-        file_obj = open(ip6tables_file,"a")
-        file_obj.write(ip6tables_line)
+        file_obj = open(ip6tables_file,"r")
+        ip6tables_config = file_obj.read()
         file_obj.close()
     except:
-        warn("Could not write ip6tables file")
-        write_errors += 1
+        warn("Could not read ip6tables config")
+        read_errors += 1
+    
+    if iptables_config != None:
+        iptables_config = iptables_config.replace("%PORT%",port)
+        iptables_config = iptables_config.replace("%TLS_PORT%",tls_port)
+        try:
+            file_obj = open(iptables_file,"w")
+            file_obj.write(iptables_config)
+            file_obj.close()
+        except:
+            warn("Could not write iptables config")
+            write_errors += 1
+
+    if ip6tables_config != None:
+        ip6tables_config = ip6tables_config.replace("%PORT%",port)
+        ip6tables_config = ip6tables_config.replace("%TLS_PORT%",tls_port)
+        try:
+            file_obj = open(ip6tables_file,"w")
+            file_obj.write(ip6tables_config)
+            file_obj.close()
+        except:
+            warn("Could not write ip6tables config")
+            write_errors += 1            
     
     if write_errors >= 1 or read_errors >= 1:
-        total_errors = read_errors + write_errors
-        return total_errors
-
-    return 0
+        return read_errors,write_errors
+    else:
+        return 0,0
 
 def enable_restart_services():
     '''Restart and enable systemd units'''
@@ -301,14 +320,24 @@ def main():
     WARNS += write_environment(data)
     
     submsg("Configuring TinyProxy, Stunnel, and IPTables")
-    WARNS += proc_payload(data)
+    READ_ERRORS,WRITE_ERRORS = proc_payload(data)
     
-    submsg("Getting TLS Certs from Lets Encrypt!")
-    WARNS += run_certbot_script(config['certbot-script'])
+    WARNS += read_errors + write_errors
     
-    submsg("Restarting Daemons")
-    WARNS += enable_restart_services()
+    # Lets Encrypt! only works if there is a FQDN
+    if data['domain'] != "":
+        submsg("Getting TLS Certs from Lets Encrypt!")
+        WARNS += run_certbot_script(config['certbot-script'])
+    else:
+        submsg("No FQDN, writing snakeoil cert")
+        WARNS += run_certbot_script(config['snakeoil-script'])
     
+    if READ_ERRORS == 0 and WRITE_ERRORS == 0:
+        submsg("Restarting Daemons")
+        WARNS += enable_restart_services()
+    else:
+        submsg("There were errors processing the config files, NOT restarting services. READ:" + READ_ERRORS + " WRITE:" + WRITE_ERRORS)
+
     submsg("Writing Donefile")
     WARNS += write_done()
     
