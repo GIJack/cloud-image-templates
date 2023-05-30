@@ -261,9 +261,9 @@ def proc_payload(data):
 
 def enable_restart_services(use_fqdn=False):
     '''Restart and enable systemd units'''
-    services = [ "tinyproxy", "iptables", "ip6tables", "stunnel" ]
+    services     = [ "tinyproxy", "iptables", "ip6tables", "stunnel" ]
     fqdn_service = "certbot-renew-custom.timer"
-    exit_code = 0
+    exit_code    = 0
     for item in services:
         try:
             exit_code += subprocess.check_call(['systemctl', 'restart', item])
