@@ -26,7 +26,7 @@ config = {
     'stunnel-config'   : '/etc/stunnel/stunnel.conf',
     'iptables-file'    : '/etc/iptables/iptables.rules',
     'ip6tables-file'   : '/etc/iptables/ip6tables.rules',
-    'certbot-script'   : "/root/do_certbot.sh"
+    'certbot-script'   : "/root/do_certbot.sh",
     'snakeoil-script'  : "/root/do_snakeoil.sh"
 }
 
@@ -330,7 +330,7 @@ def main():
     submsg("Configuring TinyProxy, Stunnel, and IPTables")
     READ_ERRORS,WRITE_ERRORS = proc_payload(data)
     
-    WARNS += read_errors + write_errors
+    WARNS += READ_ERRORS + WRITE_ERRORS
     
     # Lets Encrypt! only works if there is a FQDN
     if data['domain'] != "":
