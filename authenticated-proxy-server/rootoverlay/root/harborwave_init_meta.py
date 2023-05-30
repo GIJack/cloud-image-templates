@@ -336,11 +336,11 @@ def main():
     # Lets Encrypt! only works if there is a FQDN
     if data['domain'] != "":
         use_fqdn = True
-        submsg("Getting TLS Certs from Lets Encrypt!")
+        submsg("Getting TLS Certs From Lets Encrypt!")
         WARNS += run_certbot_script(config['certbot-script'])
     else:
         use_fqdn = False
-        submsg("No FQDN, writing snakeoil cert")
+        submsg("No FQDN, Writing Snakeoil Cert")
         WARNS += run_certbot_script(config['snakeoil-script'])
     
     if READ_ERRORS == 0 and WRITE_ERRORS == 0:
