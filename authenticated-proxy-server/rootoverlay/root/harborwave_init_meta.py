@@ -278,8 +278,9 @@ def enable_restart_services(use_fqdn=False):
     
     if use_fqdn == True:
         try:
-            exit_code += subprocess.check_call('systemctl', 'enable', fqdn_service)
+            exit_code += subprocess.check_call(['systemctl', 'enable', fqdn_service])
         except:
+            warn("Could Not Enable Certbot Renew Timer")
             exit_code += 1
         
     if exit_code > 0:
