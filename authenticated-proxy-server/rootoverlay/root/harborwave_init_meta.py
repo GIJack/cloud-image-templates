@@ -259,9 +259,10 @@ def proc_payload(data):
     else:
         return 0,0
 
-def enable_restart_services():
+def enable_restart_services(use_fqdn=False):
     '''Restart and enable systemd units'''
-    services = [ "tinyproxy", "iptables", "ip6tables","stunnel"]
+    services = [ "tinyproxy", "iptables", "ip6tables", "stunnel" ]
+    fqdn_service = "certbot-renew-custom.timer"
     exit_code = 0
     for item in services:
         try:
@@ -273,6 +274,12 @@ def enable_restart_services():
             exit_code += subprocess.check_call(['systemctl', 'enable', item])
         except:
             warn("Could Not Enable Service: " + item)
+            exit_code += 1
+    
+    if use_fqdn == True:
+        try:
+            exit_code += subprocess.check_call('systemctl', 'enable', fqdn_service)
+        except:
             exit_code += 1
         
     if exit_code > 0:
@@ -326,15 +333,17 @@ def main():
     
     # Lets Encrypt! only works if there is a FQDN
     if data['domain'] != "":
+        use_fqdn = True
         submsg("Getting TLS Certs from Lets Encrypt!")
         WARNS += run_certbot_script(config['certbot-script'])
     else:
+        use_fqdn = False
         submsg("No FQDN, writing snakeoil cert")
         WARNS += run_certbot_script(config['snakeoil-script'])
     
     if READ_ERRORS == 0 and WRITE_ERRORS == 0:
         submsg("Restarting Daemons")
-        WARNS += enable_restart_services()
+        WARNS += enable_restart_services(use_fqdn=use_fqdn)
     else:
         submsg("There were errors processing the config files, NOT restarting services. READ:" + READ_ERRORS + " WRITE:" + WRITE_ERRORS)
 
