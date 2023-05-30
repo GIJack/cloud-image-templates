@@ -25,4 +25,4 @@
 # HTTP/HTTPS
 -A OUTPUT -m multiport -p tcp --dports 80,443 -j ACCEPT 
 
-COMMIT # Added back by script after rules
+COMMIT
