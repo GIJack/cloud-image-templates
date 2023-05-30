@@ -288,13 +288,13 @@ def enable_restart_services(use_fqdn=False):
         return 0
 
 def run_certbot_script(script_file):
-    error_code = 0
     try:
-        error_code = subprocess.call(["/usr/bin/bash",script_file,"firstrun"])
+        subprocess.call(["/usr/bin/bash",script_file,"firstrun"])
     except:
         warn("Certbot failed, without certs stunnel will not work")
-        error_code = 1
-    return error_code
+        return 1
+
+    return 0
 
 def write_done():
     '''Touch /opt/harbor-wave/done so we know this script ran already'''
