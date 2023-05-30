@@ -7,10 +7,9 @@
 | browser's proxy settings to forward     |
 | traffic.                                |
 |                                         |
+| HTTPS(TLS) available via Stunnel        |
+| default TLS port: 8443                  |
 | uses tinyproxy                          |
-|                                         |
-| commands: init_proxy.sh - initial setup |
-| for username/password/port              |
 |                                         |
 | proxy_passwd.sh - change password for   |
 \ proxy                                   /
