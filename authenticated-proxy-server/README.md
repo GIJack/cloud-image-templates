@@ -11,7 +11,7 @@ features:
 
 Harbor Wave Payload
 ===================
-uses a config with three items: user, pass and port. item and value are
+uses a config with four items: user, pass, port and tls_port. item and value are
 seperated with "="(colon), items/lines are seperated with ";"(semi-colon) and
 uses a "#"(pound) for a comment.
 
