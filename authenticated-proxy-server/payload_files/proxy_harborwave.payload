@@ -2,7 +2,7 @@
 # use with --payload "FILE:/path/to/proxy_harborwave.payload" in harborwave
 # Comment is #. lines are ended with a ;
 
-#item:value
+#item=value;
 user=username;
 pass=password;
 port=8888;
