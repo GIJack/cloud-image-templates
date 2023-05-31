@@ -51,6 +51,7 @@ harbor-wave set payload "FILE:<path_to_torrc_options>"
 ```
 
 4. Spawn
+
 Spawn N amount of extra TOR nodes
 
 ```
