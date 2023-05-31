@@ -59,6 +59,7 @@ harbor-wave spawn <N>
 ```
 
 5. OPTIONAL - set timezone
+
 under  template.rc you can change TIMEZONE away from UTC to local time. It
 effects nothing
 
