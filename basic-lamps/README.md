@@ -1,9 +1,9 @@
 Linux Apache Mysql(maria) PHP openSsl
 =====================================
 LAMPS Stands for:
-Linux, Apache, MySQL(pronounced My-Squrriel), PHP and OpenSSL
+Linux, Apache, MySQL, PHP and OpenSSL
 
-We have substituted MySQL for community fork of MariaDB
+We have substituted MySQL for a community fork: MariaDB
 
 The so called LAMPS stack of Linux Apache, MySQL, PHP, and OpenSSL is a now
 obsolete stack of software for web application development. Once upon a time
@@ -24,8 +24,7 @@ Here, it is being used as an example profile as an application stack.
 
 Famous software that runs/ran on LAMPS:
 - http://galleryproject.org/ - Image sharing software
-- https://wordpress.com/ - Infamous blog software, BE WARNED
-more security holes then swiss cheese.
+- https://wordpress.com/ - Famous blogging software.
 - https://nextcloud.com/ - Personal cloud software
 - https://simplemachines.org/ - Web BBS
 - https://www.phpbb.com/ - Widely used Web BBS
