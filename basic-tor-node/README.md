@@ -19,8 +19,8 @@ HOW TO
 1. Compile with disk-image-scripts
 
 ```
-gen\_template\_image.sh init-image
-gen\_template\_image.sh compile-image
+gen_template_image.sh init-image
+gen_template_image.sh compile-image
 ```
 
 2. Upload to Digital Ocean's Cloud
