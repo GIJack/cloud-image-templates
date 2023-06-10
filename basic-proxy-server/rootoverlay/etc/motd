@@ -1,23 +1,19 @@
- _________________________________________ 
-/ Simple HTTP Proxy server                \
-| ------------------------                |
-| This is a                               |
-| simple HTTP proxy server. set the IP    |
-| and port(default 8888) to your          |
-| browser's proxy settings to forward     |
-| traffic.                                |
-|                                         |
-| uses tinyproxy                          |
-|                                         |
-| commands: init_proxy.sh - initial setup |
-| for username/password/port              |
-|                                         |
-| proxy_passwd.sh - change password for   |
-\ proxy                                   /
- ----------------------------------------- 
+ ______________________________________ 
+/ Simple HTTP Proxy server             \
+| ------------------------             |
+|                                      |
+| This is a simple HTTP/HTTPS proxy    |
+| server. It listens on port 8888 and  |
+| 8443 with TLS encryption. This is a  |
+| basic server that uses no            |
+| authentication                       |
+|                                      |
+| uses tinyproxy and stunnel for proxy |
+\ and TLS respectively                 /
+ -------------------------------------- 
         \   ^__^
          \  (00)\_______
             (__)\       )\/\
-             U ||----w |
-               ||     ||
+             u ||----w |
+                ||     ||
 
