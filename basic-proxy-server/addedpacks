@@ -3,6 +3,10 @@
 # Proxy Server
 tinyproxy
 
+# TLS encryption
+stunnel
+certbot
+
 # system tools
 sysstat
 htop

@@ -145,7 +145,13 @@ def proc_payload(data):
     password = defaults['pass']
     port     = defaults['port']
     tls_port = defaults['tls_port']
-    fqdn     = platform.node() + "." + data['domain']
+    
+    if data['domain'] != "":
+        use_fqdn = True
+        fqdn     = platform.node() + "." + data['domain']
+    else:
+        use_fqdn = False
+        fqdn     = platform.node()
     
     line_seperator  = ";"
     field_seperator = "="
@@ -199,9 +205,18 @@ def proc_payload(data):
         read_errors += 1
         
     # replace variables with their values
+    if use_fqdn == True:
+        stunnel_cert = "/etc/letsencrypt/live/%s/fullchain.pem" % (fqdn)
+        stunnel_key  = "/etc/letsencrypt/live/%s/privkey.pem"   % (fqdn)
+    else:
+        stunnel_cert = "/etc/ssl/server.crt"
+        stunnel_key  = "/etc/ssl/server.key"
+    
     stunnel_conf = stunnel_conf.replace("%TLS_PORT%",tls_port)
     stunnel_conf = stunnel_conf.replace("%PORT%",port)
-    stunnel_conf = stunnel_conf.replace("%FQDN%",fqdn)
+    stunnel_conf = stunnel_conf.replace("%CERT_LINE%",stunnel_cert)
+    stunnel_conf = stunnel_conf.replace("%KEY_LINE%",stunnel_key)
+
     # write
     try:
         file_obj   = open(stunnel_conf_file,"w")
