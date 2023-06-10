@@ -20,7 +20,7 @@
 # SSH
 -A INPUT -m multiport -p tcp --dports 22 -j ACCEPT
 # Proxy Server(tiny proxy)
--A INPUT -m multiport -p tcp --dports 8888 -j ACCEPT
+-A INPUT -m multiport -p tcp --dports 8888,8443 -j ACCEPT
 
 ## Outputs
 # DNS
