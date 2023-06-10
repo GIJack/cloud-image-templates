@@ -23,7 +23,8 @@
 
 # Outputs
 # DNS
--A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 53 -j ACCEPT
+-A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 53,853 -j ACCEPT
+-A OUTPUT -m multiport -p tcp -d 0.0.0.0/0 --dports 53 -j ACCEPT
 # NTP
 -A OUTPUT -m multiport -p udp -d 0.0.0.0/0 --dports 123 -j ACCEPT
 # HTTP/HTTPS
