@@ -1,7 +1,7 @@
 # List of Packages to be installed, one per line, # is comments
 
 # the bouncer
-vnc
+znc
 
 # for env script
 python
@@ -12,3 +12,7 @@ ninja-ids # early warning system, bouncers, serious business
 iftop
 iotop
 htop
+bind
+traceroute
+net-tools
+sysstat
