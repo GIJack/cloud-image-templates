@@ -96,6 +96,8 @@ main(){
       gen_znc_pem || ERRORS+=1
       # set permissions for ZNC user
       chown -R "${ZNC_USER}":"${ZNC_USER}" "${ZNC_HOME}"
+      submsg "Restarting ZNC" || ERRORS+=1
+      systemctl restart znc
       ;;
     renew)
       message "Updating Certs"
@@ -103,6 +105,8 @@ main(){
       renew_certbot || ERRORS+=1
       submsg "Regenerating ZNC cert file"
       gen_znc_pem || ERRORS+=1
+      submsg "Restarting ZNC" || ERRORS+=1
+      systemctl restart znc
       ;;
     *)
       help_and_exit
