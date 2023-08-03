@@ -47,7 +47,12 @@ exit_with_error(){
 
 init_certbot(){
   local -i errors=0
+  local iptables_string="INPUT -m tcp -p tcp --dport 80 -j ACCEPT"
+  
+  iptables -I ${iptables_string} || return 9
   certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || errors+=1
+  iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
+
   # Generating DH parms is a one time thing. Technically we have some in znc.pem, but we need a stand alone file. Easiest way
   # to do this in shell is just make a new one
   openssl dhparam -out "${DH_PARAM_FILE}" ${DH_PARAM_BITS} || errors+=1
@@ -56,8 +61,14 @@ init_certbot(){
 }
 
 renew_certbot(){
-  /usr/bin/certbot -q renew
-  return ${?}
+  local -i error_code=0
+  local iptables_string="INPUT -m tcp -p tcp --dport 80 -j ACCEPT"
+  iptables -I ${iptables_string} || return 9
+ 
+  /usr/bin/certbot -q renew || error_code=${?}
+  iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
+
+  return ${error_code}
 }
 
 gen_znc_pem(){
