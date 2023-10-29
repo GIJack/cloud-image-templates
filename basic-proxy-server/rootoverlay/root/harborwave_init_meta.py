@@ -158,8 +158,8 @@ def proc_payload(data):
         stunnel_cert = "/etc/ssl/server.crt"
         stunnel_key  = "/etc/ssl/server.key"
     
-    stunnel_conf = stunnel_conf.replace("%TLS_PORT%",tls_port)
-    stunnel_conf = stunnel_conf.replace("%PORT%",port)
+    #stunnel_conf = stunnel_conf.replace("%TLS_PORT%",tls_port)
+    #stunnel_conf = stunnel_conf.replace("%PORT%",port)
     stunnel_conf = stunnel_conf.replace("%CERT_LINE%",stunnel_cert)
     stunnel_conf = stunnel_conf.replace("%KEY_LINE%",stunnel_key)
     # write
