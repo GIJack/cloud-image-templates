@@ -12,7 +12,7 @@ Runonce that runs certbot. Has work arounds for aggressive IPtables rules.
 Needs to be run as root
 
     USAGE:
-    ./certbot_znc_update.sh [firstrun|renew|help]
+    ./do_certbot.sh [firstrun|renew|help]
 EOF
   exit 4
 }
@@ -36,6 +36,11 @@ message(){
 submsg(){
   echo "[+] ${@}"
   logger "do_certbot.sh: ${@}"
+}
+
+warn(){
+  echo 1>&2 "do_certbot.sh:WARN: ${2}"
+  logger "do_certbot.sh: WARN: ${2}"
 }
 
 exit_with_error(){
