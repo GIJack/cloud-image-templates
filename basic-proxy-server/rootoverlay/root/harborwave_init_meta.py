@@ -129,6 +129,7 @@ def proc_payload(data):
     
     # Get payload from data
     payload = data['payload']
+    payload = strip_comments(payload)
 
     # Check domain
     if data['domain'] != "":
@@ -144,7 +145,6 @@ def proc_payload(data):
     try:
         file_obj     = open(stunnel_conf_file,"r")
         stunnel_conf = file_obj.read()
-        stunnel_conf = strip_comments(stunnel_conf)
         file_obj.close()
     except:
         warn("Could not read Stunnel config: " + stunnel_conf_file)
