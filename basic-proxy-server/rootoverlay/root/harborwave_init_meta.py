@@ -67,7 +67,7 @@ def strip_comments(in_file):
         line = line.split(comment)
         if line[0] != "":
             out_lines.append(line[0])
-    out_file = " ".join(out_lines)
+    out_file = "\n".join(out_lines)
     return out_file
 
 def get_data(config):
@@ -144,6 +144,7 @@ def proc_payload(data):
     try:
         file_obj     = open(stunnel_conf_file,"r")
         stunnel_conf = file_obj.read()
+        stunnel_conf = strip_comments(stunnel_conf)
         file_obj.close()
     except:
         warn("Could not read Stunnel config: " + stunnel_conf_file)
