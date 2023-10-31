@@ -1,0 +1,44 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+#VPN Tunnel
+#-A INPUT -i eth0 -m state --state NEW -p udp --dport 1194 -j ACCEPT
+#-A INPUT -i tun+ -j ACCEPT
+
+#This allows connections that match other rules to automaticly allow two way communications
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# always allow the loopback
+-A OUTPUT -o lo -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+
+# Allow pings, this is super helpful for diagnostics
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# SSH
+-A INPUT -m tcp -p tcp -s 0.0.0.0/0 --dport 22 -j ACCEPT
+
+# Icecast
+-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 8000,8443 -j ACCEPT
+
+# email server
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 25 -j ACCEPT
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 587,465,25 -j ACCEPT
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 143,993 -j ACCEPT
+
+# forward facing web server
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 443,80 -j ACCEPT
+
+# Jabber
+#-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 5222,5223,5269,8010 -j ACCEPT
+
+#VPN forwarding
+#-A FORWARD -i eth0 -o tun0 -m state --state ESTABLISHED,RELATED -j ACCEPT
+#-A FORWARD -s 10.11.25.0/24 -o eth0 -j ACCEPT
+#-A POSTROUTING -s 10.11.25.0/24 -o eth0 -j MASQUERADE
+
+COMMIT
+
