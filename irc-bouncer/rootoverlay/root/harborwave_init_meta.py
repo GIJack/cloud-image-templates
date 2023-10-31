@@ -102,7 +102,7 @@ def write_environment(data):
         
     return 0
 
-def write_payload(data):
+def run_payload(data):
     '''write payload file'''
     
     payload_dir = config['app-dir'] + "/payload"
@@ -156,7 +156,7 @@ def main():
     WARNS += write_environment(data)
     
     submsg("Extracting payload")
-    WARNS += write_payload(data)
+    WARNS += run_payload(data)
     
     submsg("Initialize Lets Encrypt! certs for ZNC")
     run_znc_script(config['znc_runonce'])
