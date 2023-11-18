@@ -20,6 +20,9 @@
 # Icecast
 -A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 8000,8443 -j ACCEPT
 
+#Outgoing DNS:
+-A OUTPUT -p udp -m multiport --dports 53,853 -j ACCEPT
+-A OUTPUT -p tcp -m multiport --dports 53 -j ACCEPT
 
 # email server
 #-A INPUT -m multiport -p tcp --dports 25 -j ACCEPT
