@@ -8,3 +8,11 @@ Payload
 =======
 There is no payload settings for this module. see authenticated-icecast
 
+Settings:
+
+Port		8000
+TLS Port	8443
+
+stream password	password
+admin user	admin
+admin password	password
