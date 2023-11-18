@@ -19,8 +19,11 @@ main() {
    cat "${SSL_DIR}/${CERTNAME}.key"  "${SSL_DIR}/${CERTNAME}.crt" > "${ICECAST_CERT}" || errors+=1
    if [ ${ERRORS} -gt 0 ];then
      echo "do_snakeoil.sh: script threw an error, see above"
+     logger "do_snakeoil.sh: script threw an error"
      exit 1
     else
+     echo "do_snakeoil.sh: Done"
+     logger "do_snakeoil.sh: Done"
      exit 0
    fi
 }
