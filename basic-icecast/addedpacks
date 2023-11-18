@@ -8,3 +8,5 @@ python
 
 #erratta
 iptables
+inetutils
+certbot
