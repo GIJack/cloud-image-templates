@@ -65,7 +65,7 @@
 
     <!-- You may have multiple <listen-socket> elements -->
     <listen-socket>
-        <port>%PORT%</port>
+        <port>8000</port>
         <!-- <bind-address>127.0.0.1</bind-address> -->
         <!-- <shoutcast-mount>/stream</shoutcast-mount> -->
     </listen-socket>
@@ -75,7 +75,7 @@
     </listen-socket>
     -->
     <listen-socket>
-        <port>%TLS_PORT%</port>
+        <port>8443</port>
         <ssl>1</ssl>
     </listen-socket>
 

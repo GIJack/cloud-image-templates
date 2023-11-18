@@ -140,9 +140,10 @@ def proc_payload(data):
         
     ## Do Stunnel config
     # read
-    icecast_conf_file = config['icecast-config']
+    icecast_conf_file     = config['icecast-config']
+    icecast_conf_template = config['icecast-config'] + ".template"
     try:
-        file_obj     = open(icecast_conf_file,"r")
+        file_obj     = open(icecast_conf_template,"r")
         icecast_conf = file_obj.read()
         file_obj.close()
     except:
