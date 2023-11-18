@@ -53,7 +53,7 @@ exit_with_error(){
 
 init_certbot(){
   local -i error_code=0
-  local iptables_string="INPUT -m tcp -p tcp --dport %PORT% -j ACCEPT"
+  local iptables_string="INPUT -m tcp -p tcp --dport ${PORT} -j ACCEPT"
   iptables -I ${iptables_string} || return 9
  
   certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || error_code=${?}
@@ -75,7 +75,7 @@ gen_icecast_file(){
 
 renew_certbot(){
   local -i error_code=0
-  local iptables_string="INPUT -m tcp -p tcp --dport %PORT% -j ACCEPT"
+  local iptables_string="INPUT -m tcp -p tcp --dport ${PORT} -j ACCEPT"
   iptables -I ${iptables_string} || return 9
  
   certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || error_code=${?}
