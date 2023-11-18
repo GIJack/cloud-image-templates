@@ -6,7 +6,7 @@ icecast
 # for init script
 python
 
-#erratta
+#errata
 iptables
 inetutils
 certbot
