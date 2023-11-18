@@ -99,7 +99,8 @@ def get_data(config):
             missing_keys.appennd(item)
     if missing_keys != []:
         missing_keys = ",".join(missing_keys)
-        exit_with_error(9,"Missing JSON items" + missing keys + ": are you sure this is a harbor-wave VM?")
+        error_message = "Missing JSON items: %s, are you sure this is a harbor-wave VM?" % (missing_keys)
+        exit_with_error(9,error_message)
     
     return output_data
 
