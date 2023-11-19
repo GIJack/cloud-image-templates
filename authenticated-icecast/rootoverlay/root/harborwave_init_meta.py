@@ -136,6 +136,8 @@ def proc_payload(data):
     '''proccess payload file for icecast config'''
     write_errors = 0
     read_errors  = 0
+    line_seperator  = ";"
+    field_seperator = "="
     
     # Get payload from data
     payload = data['payload']
@@ -143,8 +145,6 @@ def proc_payload(data):
     payload_items = payload.split(line_seperator)
 
     #proccess payload
-    line_seperator  = ";"
-    field_seperator = "="
     processed_settings = {}
     for line in payload_items:
         line = line.strip()
@@ -158,7 +158,7 @@ def proc_payload(data):
     for item in payload_defaults:
         if item not in processed_settings:
             value = payload_defaults[item]
-            processed_settings.update({item,value})
+            processed_settings.update({item:value})
         
     # Check domain
     if data['domain'] != "":
@@ -180,12 +180,12 @@ def proc_payload(data):
         warn("Could not read Icecast config: " + icecast_conf_file)
         read_errors += 1
     # Replace
-    icecast_conf = icecast_conf.replace("%TLS_PORT%",processed_settings(tls_port))
-    icecast_conf = icecast_conf.replace("%PORT%",processed_settings(port))
-    icecast_conf = icecast_conf.replace("%ADMIN_USER%",processed_settings(admin_user))
-    icecast_conf = icecast_conf.replace("%ADMIN_PASSWORD%",processed_settings(admin_password))
-    icecast_conf = icecast_conf.replace("%SOURCE_PASSWORD%",processed_settings(source_password))
-    icecast_conf = icecast_conf.replace("%RELAY_PASSWORD%",processed_settings(relay_password))
+    icecast_conf = icecast_conf.replace("%TLS_PORT%",processed_settings['tls_port'])
+    icecast_conf = icecast_conf.replace("%PORT%",processed_settings['port'])
+    icecast_conf = icecast_conf.replace("%ADMIN_USER%",processed_settings['admin_user'])
+    icecast_conf = icecast_conf.replace("%ADMIN_PASSWORD%",processed_settings['admin_password'])
+    icecast_conf = icecast_conf.replace("%SOURCE_PASSWORD%",processed_settings['source_password'])
+    icecast_conf = icecast_conf.replace("%RELAY_PASSWORD%",processed_settings['relay_password'])
     icecast_conf = icecast_conf.replace("%FQDN%",fqdn)
     
     # write
@@ -198,7 +198,7 @@ def proc_payload(data):
         write_errors += 1
 
     ## iptables
-    iptables_files = [ config['iptables_files'], config['ip6tables_files'] ]    
+    iptables_files = [ config['iptables_file'], config['ip6tables_file'] ]    
     for file in iptables_files:
         #read
         try:
@@ -210,8 +210,8 @@ def proc_payload(data):
             read_errors +=1
             continue
         # Set
-        iptables_config  = iptables_config.replace("%TLS_PORT%",tls_port)
-        iptables_config  = iptables_config.replace("%PORT%",port)
+        iptables_config  = iptables_config.replace("%TLS_PORT%",processed_settings['tls_port'])
+        iptables_config  = iptables_config.replace("%PORT%",processed_settings['port'])
         #write
         try:
             file_obj = open(file,"w")
@@ -221,10 +221,8 @@ def proc_payload(data):
             warn("Could not write IPtables Config: " + iptables_file)
             write_errors += 1
 
-    if write_errors >= 1 or read_errors >= 1:
-        return read_errors,write_errors
-    else:
-        return 0,0
+    return read_errors,write_errors
+
 
 def enable_restart_services(use_fqdn=False):
     '''Restart and enable systemd units'''
