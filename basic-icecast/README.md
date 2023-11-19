@@ -13,6 +13,8 @@ Settings:
 Port		8000
 TLS Port	8443
 
-stream password	password
+source password	password
+relay password	password
+
 admin user	admin
 admin password	password
