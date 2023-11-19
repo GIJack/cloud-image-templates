@@ -255,6 +255,7 @@ def enable_restart_services(use_fqdn=False):
         
 def stop_service():
     '''Stop systemd units before certbot runs'''
+    exit_code = 0
     services     = [ "icecast" ]
     for item in services:
         try:
@@ -262,6 +263,8 @@ def stop_service():
         except:
             warn("Could Not Stop Service: " + item)
             exit_code += 1
+            
+    return exit_code
 
 def run_certbot_script(script_file):
     try:
