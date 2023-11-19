@@ -18,7 +18,7 @@ EOF
 }
 ### VARIABLES
 # Edit this before use. This is what email your LETS ENCRYPT! certs are registered to
-readonly LETSENCRYPT_EMAIL="postmaster@goatse.camera"
+readonly LETSENCRYPT_EMAIL="postmaster@example.com"
 
 ### /VARIABLES
 
@@ -28,6 +28,7 @@ readonly ENCRYPTION_KEY="/etc/letsencrypt/live/${FQDN}/privkey.pem"
 readonly ENCRYPTION_CERT="/etc/letsencrypt/live/${FQDN}/fullchain.pem"
 readonly ICECAST_CERT="/usr/share/icecast/icecast.pem"
 readonly PORT=80
+readonly SERVICES="icecast"
 ### /CONSTANTS
 
 message(){
@@ -76,11 +77,22 @@ gen_icecast_file(){
 renew_certbot(){
   local -i error_code=0
   local iptables_string="INPUT -m tcp -p tcp --dport ${PORT} -j ACCEPT"
+  submsg "Opening firewall hole"
   iptables -I ${iptables_string} || return 9
- 
+  submsg "Stopping Services"
+  for service in ${SERVICES};do
+    systemctl stop ${service} || warn "Could not stop ${item}"
+  done
+  submsg "Updating Lets Encrypt via certbot"
+
   certbot certonly --standalone --domains "${FQDN}" -n --agree-tos --email "${LETSENCRYPT_EMAIL}" || error_code=${?}
  
+  submsg "Closing Firewall hole"
   iptables -D ${iptables_string} || warn "IPTables rule for certbot left open. Please correct this mantually"
+  submsg "Restarting Services"
+  for item in ${SERVICES};do
+    systemctl restart "${item}" || warn "Could not start ${item}"
+  done
   return ${error_code}
 }
 
