@@ -252,6 +252,16 @@ def enable_restart_services(use_fqdn=False):
         return 1
     else:
         return 0
+        
+def stop_service():
+    '''Stop systemd units before certbot runs'''
+    services     = [ "icecast" ]
+    for item in services:
+        try:
+            exit_code += subprocess.check_call(['systemctl', 'Stop', item])
+        except:
+            warn("Could Not Stop Service: " + item)
+            exit_code += 1
 
 def run_certbot_script(script_file):
     try:
@@ -301,6 +311,7 @@ def main():
     if data['domain'] != "":
         use_fqdn = True
         submsg("Getting TLS Certs From Lets Encrypt!")
+        stop_service()
         WARNS += run_certbot_script(config['certbot-script'])
     else:
         use_fqdn = False
