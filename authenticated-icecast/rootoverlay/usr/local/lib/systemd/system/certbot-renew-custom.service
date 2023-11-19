@@ -1,0 +1,9 @@
+[Unit]
+Description=Renew certificates acquired via Certbot(With hooks to get around firewall)
+Documentation=https://eff-certbot.readthedocs.io/en/stable/
+
+[Service]
+Type=oneshot
+ExecStart=/root/do_certbot.sh renew
+PrivateTmp=true
+

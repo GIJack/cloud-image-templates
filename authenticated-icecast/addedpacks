@@ -1,0 +1,12 @@
+# List of Packages to be installed, one per line, # is comments
+
+# icecast server
+icecast
+
+# for init script
+python
+
+#errata
+iptables
+inetutils
+certbot

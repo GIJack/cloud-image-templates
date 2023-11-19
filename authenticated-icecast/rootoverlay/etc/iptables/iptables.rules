@@ -1,0 +1,36 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+
+#VPN Tunnel
+#-A INPUT -i eth0 -m state --state NEW -p udp --dport 1194 -j ACCEPT
+#-A INPUT -i tun+ -j ACCEPT
+
+#This allows connections that match other rules to automaticly allow two way communications
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+# always allow the loopback
+-A OUTPUT -o lo -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+
+# Allow pings, this is super helpful for diagnostics
+-A INPUT -p icmp --icmp-type echo-request -j ACCEPT
+
+# SSH
+-A INPUT -m tcp -p tcp -s 0.0.0.0/0 --dport 22 -j ACCEPT
+
+# Icecast
+-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports %PORT%,%TLS_PORT% -j ACCEPT
+
+#Outgoing DNS:
+-A OUTPUT -p udp -m multiport --dports 53,853 -j ACCEPT
+-A OUTPUT -p tcp -m multiport --dports 53 -j ACCEPT
+
+#Digital Ocean API host
+-A OUTPUT -d 169.254.169.254 -p tcp -m multiport --dports 80,443 -j ACCEPT
+
+
+COMMIT
+

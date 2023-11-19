@@ -1,0 +1,7 @@
+# Authenticated Icecast Server Parameters
+port=8000;
+tls_port=8443;
+admin_user=admin;
+admin_password=password;
+source_password=password;
+relay_password=password;
