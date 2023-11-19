@@ -314,7 +314,7 @@ def main():
     if data['domain'] != "":
         use_fqdn = True
         submsg("Getting TLS Certs From Lets Encrypt!")
-        stop_service()
+        WARNS += stop_service()
         WARNS += run_certbot_script(config['certbot-script'])
     else:
         use_fqdn = False
