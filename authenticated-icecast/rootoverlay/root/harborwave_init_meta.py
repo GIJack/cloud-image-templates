@@ -259,7 +259,7 @@ def stop_service():
     services     = [ "icecast" ]
     for item in services:
         try:
-            exit_code += subprocess.check_call(['systemctl', 'Stop', item])
+            exit_code += subprocess.check_call(['systemctl', 'stop', item])
         except:
             warn("Could Not Stop Service: " + item)
             exit_code += 1
