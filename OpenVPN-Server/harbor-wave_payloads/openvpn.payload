@@ -1,0 +1,8 @@
+# Harborwave payload data for OpenVPN-Server Template
+# See here: https://github.com/GIJack/cloud-image-templates/tree/main/OpenVPN-Server/
+
+# TODO: find out how to autogenerate this...
+
+ca=""
+cert=""
+key=""

@@ -1,0 +1,11 @@
+# List of Packages to be installed, one per line, # is comments
+
+#needed for harbor-wave runonce
+python-is-python3
+
+# Base utils
+iptables-persistent
+dnsmasq
+
+#Application
+openvpn
