@@ -20,8 +20,8 @@ Based on
 Compile
 -------
 ```
-gen\_cloud\_template.sh init-image
-gen\_cloud\_tempalte.sh compile-template
+gen_cloud_template.sh init-image
+gen_cloud_tempalte.sh compile-template
 ```
 
 Harbor-Wave Payloads
