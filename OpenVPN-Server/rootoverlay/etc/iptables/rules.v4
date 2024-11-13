@@ -1,7 +1,9 @@
+# Hardened IPTables config.
+
 *filter
 :INPUT DROP [0:0]
 :FORWARD DROP [0:0]
-:OUTPUT ACCEPT [0:0]
+:OUTPUT DROP [0:0]
 #VPN Tunnel
 -A INPUT -i eth0 -m state --state NEW -p udp --dport 1194 -j ACCEPT
 -A INPUT -i tun0 -j ACCEPT
@@ -22,6 +24,11 @@
 
 # forward facing web server
 #-A INPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 443,80 -j ACCEPT
+
+#Allow DNS and web connections
+-A OUTPUT -m multiport -p tcp -s 0.0.0.0/0 --dports 443,80 -j ACCEPT
+-A OUTPUT -m multiport -p udp -s 0.0.0.0/0 --dports 53,853 -j ACCEPT
+-A OUTPUT -m tcp -p tcp -s 0.0.0.0/0 --dport 53 -j ACCEPT
 
 
 #VPN forwarding
