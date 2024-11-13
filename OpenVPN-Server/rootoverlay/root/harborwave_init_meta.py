@@ -19,6 +19,13 @@ config = {
     'logfile'   : "/var/log/harbor-wave-init.log",
     'app-dir'   : '/opt/harborwave',
     'done-file' : '/opt/harborwave/done',
+    'openvpn-dir' : '/etc/openvpn/server/',
+}
+
+openvpn_file = {
+    'ca'   : '/etc/openvpn/server/ca.crt',
+    'cert' : '/etc/openvpn/server/server.crt',
+    'key'  : '/etc/openvpn/server/server.key',
 }
 
 def message(message):
@@ -99,25 +106,81 @@ def write_environment(data):
         
     return 0
 
-# TODO: re-write with execute payload
-def write_payload(data):
-    '''write payload file'''
+def openvpn_runonce():
+    errors = 0
     
-    payload_dir = config['app-dir'] + "/payload"
-    os.makedirs(payload_dir,mode=0o755,exist_ok=True)
-    if data['payload-filename'] != "":
-        payload_file = payload_dir + "/" + data['payload-filename']
-    else:
-        payload_file = payload_dir + "/data"
+    # Make directory
     try:
-        file_obj = open(payload_file,"w")
-        file_obj.write(data['payload'])
-        file_obj.close()
+        os.makedirs(config['openvpn-dir'],0o700,exit_ok=True)
+        os.chmod(config['openvpn-dir'],0o700)
     except:
-        warn("Could not write payload to " + payload_file)
+        warn_line = "Dir %s does not exist and cannot be created" % config['openvpn-dir']
+        warn(warn_line)
         return 1
     
-    return 0
+    # Create dh.pem
+    dh_file = config['openvpn-dir'] + "dh.pem"
+    dh_bits = 2048
+    errors += subprocess.check_call(['openssl', 'dhparam', '-out', dh_file, dh_bits])
+    
+    # Create ta.key
+    ta_key_file = config['openvpn-dir'] + "ta.key"
+    errors += subprocess.check_call(['openvpn', '--genkey', 'secret', ta_key_file])
+
+def process_payload(data):
+    '''Process payload. Write OpenVPN Cert and Key Files from Payload.'''
+    warns = 0
+    # decode the JSON
+    try:
+        payload_dict = json.loads(data)
+    except:
+        warn("Invalid JSON, OpenVPN remains unconfigured")
+        return 1
+    
+    # preflight checks.
+    if "ca" not in payload_dict:
+        warn("No CA Cert In Payload, Aborting...")
+        return 1
+    elif "cert" not in payload_dict:
+        warn("No Server Certificate In Payload. Aborting...")
+        return 1
+    elif "key" not in payload_dict:
+        warn("No Server Key In Payload. Aborting...")
+        return 1
+    
+    # write to the files
+    write_list = ['ca','cert','key']
+    for item in write_list:
+        try:
+            file_obj = open(openvpn_file[item],"w")
+            file_obj.write(payload_dict[item])
+            file_obj.close()
+            os.chmod(openvpn_file[item],0o400)
+        except:
+            warn_line = "Could Not Write %s" % file
+            warn(warn_line)
+            warns += 1
+            
+    return(warns)
+
+def start_enable_openvpn():
+    exit_code = 0
+    service = "openvpn-server@tun0"
+    try:
+        exit_code += subprocess.check_call(['systemctl', 'restart', service])
+    except:
+        warn("Could Not Restart Service: " + item)
+        exit_code += 1
+    try:
+        exit_code += subprocess.check_call(['systemctl', 'enable', service])
+    except:
+        warn("Could Not Enable Service: " + item)
+        exit_code += 1
+
+    if exit_code > 0:
+        return 1
+    else:
+        return 0
 
 def write_done():
     '''Touch /opt/harbor-wave/done so we know this script ran already'''
@@ -149,8 +212,14 @@ def main():
     submsg("Writing to environment file")
     WARNS += write_environment(data)
     
-    submsg("Extracting payload")
-    WARNS += write_payload(data)
+    submsg("Generating ta.key and dh.pem")
+    WARNS += openvpn_runonce()
+    
+    submsg("Processing payload")
+    WARNS += process_payload(data)
+    
+    submsg("Start/Enable OpenVPN")
+    WARNS += start_enable_openvpn()
     
     submsg("Writing donefile")
     WARNS += write_done()
