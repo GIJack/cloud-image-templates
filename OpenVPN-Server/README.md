@@ -71,4 +71,4 @@ https://openvpn.net/community-resources/how-to/#hardening-openvpn-security
 
 TODO
 ----
-* Test
+* Extra DNS parameters/hardening
