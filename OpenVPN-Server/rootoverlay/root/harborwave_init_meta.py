@@ -26,6 +26,7 @@ openvpn_file = {
     'ca'   : '/etc/openvpn/server/ca.crt',
     'cert' : '/etc/openvpn/server/server.crt',
     'key'  : '/etc/openvpn/server/server.key',
+    'ta'   : '/etc/openvpn/server/ta.key',
 }
 
 def message(message):
@@ -122,10 +123,6 @@ def openvpn_runonce():
     dh_file = config['openvpn-dir'] + "dh.pem"
     dh_bits = 2048
     errors += subprocess.check_call(['openssl', 'dhparam', '-out', dh_file, dh_bits])
-    
-    # Create ta.key
-    ta_key_file = config['openvpn-dir'] + "ta.key"
-    errors += subprocess.check_call(['openvpn', '--genkey', 'secret', ta_key_file])
 
 def process_payload(data):
     '''Process payload. Write OpenVPN Cert and Key Files from Payload.'''
@@ -137,20 +134,17 @@ def process_payload(data):
         warn("Invalid JSON, OpenVPN remains unconfigured")
         return 1
     
+    json_key_list = ['ca','cert','key','ta']
+
     # preflight checks.
-    if "ca" not in payload_dict:
-        warn("No CA Cert In Payload, Aborting...")
-        return 1
-    elif "cert" not in payload_dict:
-        warn("No Server Certificate In Payload. Aborting...")
-        return 1
-    elif "key" not in payload_dict:
-        warn("No Server Key In Payload. Aborting...")
-        return 1
+    for key in json_key_list:
+        if key not in payload_dict:
+            warn_line = "%s not found in payload, aborting" %s key
+            warn(warn_line)
+            return 1
     
     # write to the files
-    write_list = ['ca','cert','key']
-    for item in write_list:
+    for item in json_key_list:
         try:
             file_obj = open(openvpn_file[item],"w")
             file_obj.write(payload_dict[item])
@@ -212,7 +206,7 @@ def main():
     submsg("Writing to environment file")
     WARNS += write_environment(data)
     
-    submsg("Generating ta.key and dh.pem")
+    submsg("Generating dh.pem")
     WARNS += openvpn_runonce()
     
     submsg("Processing payload")
