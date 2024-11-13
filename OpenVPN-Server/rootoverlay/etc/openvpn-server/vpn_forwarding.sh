@@ -11,7 +11,7 @@ case ${1} in
   ;;
  down)
   logger "OpenVPN Tunnel Rules DOWN"
-  systemctl restart iptables
+  systemctl restart netfilter-persistent.service
   systemctl stop dnsmasq.service
   ;;
  *)
