@@ -19,7 +19,13 @@ config = {
     'logfile'   : "/var/log/harbor-wave-init.log",
     'app-dir'   : '/opt/harborwave',
     'done-file' : '/opt/harborwave/done',
-    'openvpn-dir' : '/etc/openvpn/server/',
+    'openvpn-dir'   : '/etc/openvpn/server/',
+    'openvpn-config' : '/etc/openvpn/server/tun0.conf',
+}
+
+default = {
+    'port'  : 1194,
+    'proto' : "udp",
 }
 
 openvpn_file = {
@@ -57,6 +63,19 @@ def do_log(message):
     log_obj = open(config['logfile'],'a')
     log_obj.write(out_message)
     log_obj.close()
+
+def _check_port(port):
+    '''Check if port is a valid TCP Port number. Takes one parameter, the port, returns bool(True/False)'''
+    # ports are intergers
+    try:
+        port = int(port)
+    except:
+        return False
+    #between 1 and 65535, or 2^16 - 1
+    if 1 <= port <= 65535:
+        return True
+    else:
+        return False
 
 def get_data(config):
     '''get the data and return it as a dict, takes the config array'''
@@ -134,8 +153,10 @@ def process_payload(data):
         warn("Invalid JSON, OpenVPN remains unconfigured")
         return 1
     
-    json_key_list = ['ca','cert','key','ta']
-
+    json_key_list = ('ca','cert','key','ta')
+    
+    
+    ## Write Encryption Options
     # preflight checks.
     for key in json_key_list:
         if key not in payload_dict:
@@ -155,6 +176,51 @@ def process_payload(data):
             warn(warn_line)
             warns += 1
             
+    ## Process non-file options:
+    valid_protos = ('tcp','udp')
+    
+    # load defaults
+    proto = default['proto']
+    port  = default['port']
+    # Check and use payload if its set correctly, use defaults otherwise
+    if 'proto' in payload_dict:
+        if payload_dict['proto'] in valid_protos:
+            proto = payload_dict['proto']
+        else:
+            warn_line = "Invalid Protocol: %s, Skipping" % payload_dict['proto']
+            warn(warn_line)
+            warns += 1
+    if 'port' in payload_dict:
+        if _check_port(payload_dict['port']) == True:
+            port = payload_dict['port']
+        else:
+            warn_line = "Invalid Port: %s, Skipping" % payload_dict['port']
+            warn(warn_line)
+            warns += 1
+    ### Write config options to OpenVPN config
+    openvpn_conf_file = config['openvpn-config']
+    replace_dict = { "+PORT+":str(port), "+PROTO+":proto }
+    # get file contents
+    try:
+        file_obj      = open(openvpn_conf_file,"r")
+        file_contents = file_obj.read()
+        file_obj.close()
+    except:
+        warn_line = "Could Not Read From OpenVPN Config: %s" % openvpn_conf_file
+        warn(warn_line)
+        warns += 1
+    # replace
+    for item in replace_dict:
+        file_contents.replace(item,replace_dict[item])
+    # write
+    try:
+        file_obj = open(open_vpn_conf_file,"w")
+        file_obj.write(file_contents)
+        file_obj.close()
+    except:
+        warn_line = "Could Not Write To OpenVPN Config %s" % openvpn_conf_file
+        warn(warn_line)
+        warns += 1
     return(warns)
 
 def start_enable_openvpn():
