@@ -29,6 +29,8 @@ Harbor-Wave Payloads
 
 openvpn.payload - blank payload file
 
+gen_payload.py  - python script for generating payloads based on prompts
+
 This payload uses JSON and takes three keys for the VPN's Crypto
 
 ca	- Cert file for the Certificate authority
@@ -50,7 +52,19 @@ Erata
 
 tun0.conf	- OpenVPN client template
 
-TODO
-----
+Setting up OpenVPN for Certificate Authentication:
+--------------------------------------------------
 
-* Add some more variables, such as protocol and port
+This only works with Certificate authentication. You need to setup a CA, and then
+generate client and server keys and certs. for the payload you will need the CA
+cert, the server key and cert, you will also need an additiona TLS key, known
+as ta.key.
+
+OpenVPN Guide:
+https://openvpn.net/community-resources/how-to/#setting-up-your-own-certificate-authority-ca-and-generating-certificates-and-keys-for-an-openvpn-server-and-multiple-clients
+
+You can also use XCA, which has a nice GUI
+https://hohnstaedt.de/xca/
+
+For Generating ta.key see this:
+https://openvpn.net/community-resources/how-to/#hardening-openvpn-security
