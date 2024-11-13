@@ -26,6 +26,7 @@ gen_cloud_tempalte.sh compile-template
 
 Harbor-Wave Payloads
 --------------------
+
 openvpn.payload - blank payload file
 
 This payload uses JSON and takes three keys for the VPN's Crypto
@@ -38,12 +39,14 @@ see https://openvpn.net/community-resources/how-to/
 
 All of these will be the contents of a text file using x.509 certs as known to
 work with OpenVPN. There is a yet to be written script that will generate
-payloads from files 
+payloads from files
+
+Erata
+-----
+
+tun0.conf	- OpenVPN client template
 
 TODO
 ----
 
-WIP
-
-* update harborwave\_init\_meta.py for image specific init
-* write payload generation script for inputing cert files
+* Add some more variables, such as protocol and port
