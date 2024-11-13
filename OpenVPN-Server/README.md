@@ -72,3 +72,4 @@ https://openvpn.net/community-resources/how-to/#hardening-openvpn-security
 TODO
 ----
 * Extra DNS parameters/hardening
+* Port Sharing/TLS Encapsulation
