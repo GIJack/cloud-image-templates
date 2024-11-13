@@ -1,0 +1,7 @@
+{
+  "_rev"  : 1.0,
+  "_meta" : "OpenVPN payload for harbor-wave VM",
+  "ca"  : "",
+  "cert": "",
+  "key" : "",
+}
