@@ -68,3 +68,7 @@ https://hohnstaedt.de/xca/
 
 For Generating ta.key see this:
 https://openvpn.net/community-resources/how-to/#hardening-openvpn-security
+
+TODO
+----
+* Test
