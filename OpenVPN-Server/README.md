@@ -41,6 +41,10 @@ All of these will be the contents of a text file using x.509 certs as known to
 work with OpenVPN. There is a yet to be written script that will generate
 payloads from files
 
+port	- port number for the VPN server to listen on. may be any valid tcp/udp
+port number(1-65535)
+proto	- protocol to use. Either udp or tcp
+
 Erata
 -----
 
