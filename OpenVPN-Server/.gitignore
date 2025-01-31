@@ -1,3 +1,4 @@
 /harbor-wave_payloads/ca.crt
-/erata/client.*
 /harbor-wave_payloads/server.*
+/harbor-wave_payloads/ta.key
+/erata/client.*
